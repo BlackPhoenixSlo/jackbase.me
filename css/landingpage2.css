@@ -1,0 +1,239 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  
+}
+.allContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+  }
+
+
+ 
+body {
+  
+  background:  url('https://assets.codepen.io/6060109/ZigZag.png');
+  
+  
+  
+  
+}
+
+.panel1 , .panel2 , .panel3 {
+  width: 350px;
+  height: 630px;
+  background-color: #fff;
+  
+  margin: 70px 0 0;
+  box-shadow: 0px 4px 4px 0px #00000040;
+  border-radius: 5px;
+  position:relative;
+  
+
+}
+
+#close-button{
+  position:absolute;
+  top: 15px;
+  right: 15px;
+}
+
+.innerContainer{
+    width: 100%;
+    text-align: center;
+    padding: 55px 55px;
+    box-sizing: border-box;
+
+  
+}
+
+#logo{
+    margin: 0 0 20px;
+    width: 55%;
+
+}
+
+.innerContainer > h2 {
+  color: blue;
+  
+  font-family: Montserrat;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 27px;
+  letter-spacing: 0px;
+  color: #2F463D;
+
+}
+
+p{
+color: #828282;
+  font-family: Ubuntu;
+font-size: 14px;
+font-weight: 400;
+line-height: 26px;
+letter-spacing: 0px;
+text-align: center;
+  padding: 15px 0 0 0;
+
+}
+.food-price-confirm{
+  display: flex;
+  background-color: #F0FFF5;
+  border-radius: 5px;
+  align-items: center;
+  margin: 40px 0 40px;
+}
+
+.food-name-price{
+  width: 50%; 
+  text-align: left;
+  padding-left: 20px;
+
+}
+.food-name-price h6 {
+font-family: Montserrat, 'Arial';
+font-weight: 700;
+font-size: 14px;
+
+letter-spacing: 0px;
+padding: 5px 0 ;  
+text-align: left;
+color: black;
+
+
+;
+}
+
+.food-name-price  h5 {
+font-family: Montserrat, 'Arial';
+font-style: normal;
+font-size: 14px;
+font-weight: 400;
+/* identical to box height */
+
+
+color: #7A8F85;
+
+}
+
+.food-price-confirm a{
+  width: 20%; 
+  text-align: right;
+  font-family: 'Montserrat' , Arial;
+font-style: normal;
+font-weight: 700;
+font-size: 13px;
+line-height: 16px;
+/* identical to box height */
+
+text-decoration-line: underline;
+
+color: #467A66;
+
+
+}
+#button-cnf{
+  width: 100%;
+  height: 50px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  background: #46A67E;
+  box-shadow: 0px 20px 20px rgba(103, 189, 153, 0.2);
+  border-radius: 5px;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 800;
+  font-size: 15px;
+  line-height: 18px;
+
+  color: #FFFFFF;
+  border: none;
+  
+
+
+  
+  
+  
+  
+}
+.dots{
+  display:flex;
+  width: 15%; 
+  justify-content: space-between;
+  
+  position:absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 35px;
+  
+
+
+  
+}
+.dot{
+    background-color: #E0E0E0;
+  
+    width: 7.29px;
+    height: 7px;
+    border-radius: 100%;
+  
+
+}
+.green{
+  background-color: #67BD99;
+}
+
+.panel1 , .panel3 {
+  display: none;
+}
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  
+  
+  .panel2{
+    width: 380px;
+    height: 680px;
+    z-index: 9;
+
+  }
+  
+  .panel2 #button-cnf {
+    margin-top: 20px;
+    
+  }
+  
+  .panel1 , .panel3 {
+  display: block;
+    z-index: 1 ;
+}
+  
+  .panel1 h2  {
+  margin-top: 25px;
+
+}
+  .panel1 h2 , .panel3 h2  {
+  margin-bottom: 20px;
+}
+  
+  .panel1 p , .panel3 p  {
+  margin-bottom: 70px;
+}
+  
+  .panel3  {
+  margin-left: -10px;
+}
+  
+  .panel1  {
+  margin-right: -10px;
+}
+  
+  .panel1 #button-cnf , .panel3 #button-cnf  {
+background: #BDBDBD;
+    box-shadow: 0px 20px 20px rgba(167, 167, 167, 0.2);
+border-radius: 5px;
+  }
+  
+}

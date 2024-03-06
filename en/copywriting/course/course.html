@@ -1,0 +1,845 @@
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <script>
+        /*
+         *   This content is licensed according to the W3C Software License at
+         *   https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document
+         *
+         *   File:   disclosure-button.js
+         *
+         *   Desc:   Disclosure button widget that implements ARIA Authoring Best Practices
+         */
+
+        'use strict';
+
+        /*
+         *   @constructorDisclosureButton
+         *
+         *
+         */
+        class DisclosureButton {
+            constructor(buttonNode) {
+                this.buttonNode = buttonNode;
+                this.controlledNode = false;
+
+                var id = this.buttonNode.getAttribute('aria-controls');
+
+                if (id) {
+                    this.controlledNode = document.getElementById(id);
+                }
+
+                this.buttonNode.setAttribute('aria-expanded', 'false');
+                this.hideContent();
+
+                this.buttonNode.addEventListener('click', this.onClick.bind(this));
+                this.buttonNode.addEventListener('focus', this.onFocus.bind(this));
+                this.buttonNode.addEventListener('blur', this.onBlur.bind(this));
+            }
+
+            showContent() {
+                if (this.controlledNode) {
+                    this.controlledNode.style.display = 'block';
+                }
+            }
+
+            hideContent() {
+                if (this.controlledNode) {
+                    this.controlledNode.style.display = 'none';
+                }
+            }
+
+            toggleExpand() {
+                if (this.buttonNode.getAttribute('aria-expanded') === 'true') {
+                    this.buttonNode.setAttribute('aria-expanded', 'false');
+                    this.hideContent();
+                } else {
+                    this.buttonNode.setAttribute('aria-expanded', 'true');
+                    this.showContent();
+                }
+            }
+
+            /* EVENT HANDLERS */
+
+            onClick() {
+                this.toggleExpand();
+            }
+
+            onFocus() {
+                this.buttonNode.classList.add('focus');
+            }
+
+            onBlur() {
+                this.buttonNode.classList.remove('focus');
+            }
+        }
+
+        /* Initialize Hide/Show Buttons */
+
+        window.addEventListener(
+            'load',
+            function () {
+                var buttons = document.querySelectorAll(
+                    'button[aria-expanded][aria-controls]'
+                );
+
+                for (var i = 0; i < buttons.length; i++) {
+                    new DisclosureButton(buttons[i]);
+                }
+            },
+            false
+        );
+    </script>
+</head>
+
+<style src="css.css">/* # FAQ
+    ——————————————— */
+    dl.faq button {
+        margin: 0;
+        margin-top: 16px;
+        padding: 4px 8px;
+        font-weight: bold;
+        font-size: 110%;
+        border: none;
+        background-color: transparent;
+        border-radius: 5px;
+    }
+
+    dl dd {
+        margin: 0;
+        padding: 0;
+        margin-left: 1.5em;
+        padding-bottom: 20px;
+        border-bottom: 2px solid #777;
+    }
+
+    dl.faq .desc {
+        margin: 0;
+        margin-top: 0.25em;
+        padding: 0.25em;
+        font-size: 110%;
+        display: none;
+        background-color: #fed;
+    }
+
+    dl.faq button:hover,
+    dl.faq button:focus {
+        padding: 2px 6px;
+        background-color: #def;
+        border: 2px solid #005a9c;
+        cursor: pointer;
+    }
+
+    dl.faq button[aria-expanded="false"]::before {
+        content: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='utf-8'%3F%3E%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' style='forced-color-adjust: auto;'%3E%3Cpolygon points='1 1, 1 11, 8 6' fill='currentcolor' stroke= 'currentcolor' /%3E%3C/svg%3E%0A");
+        position: relative;
+        left: -2px;
+    }
+
+    dl.faq button[aria-expanded="true"]::before {
+        content: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='utf-8'%3F%3E%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' style='forced-color-adjust: auto;'%3E%3Cpolygon points='1 1, 11 1, 6 8' fill='currentcolor' stroke= 'currentcolor' /%3E%3C/svg%3E ");
+        position: relative;
+        left: -4px;
+        top: 2px;
+    }
+</style>
+
+<body>
+    <h3>
+        What I will do for you.
+        <br>
+        ... Email copy, Ad copy, SEO. Web Sites (also Shopify).
+
+
+    </h3>
+    <p>First, I like old website design because it's convenient, anything is easy to find, and there are not a lot of distractions.<br>That said, I can code a good-looking page. See <span><a
+        href="../../../index.html">my main page</a></span> for an example. </p>
+
+    <p>My mission is to help you show your prospect that your product is worth buying.
+        <li>For that, I need to create a good-looking site.
+        <li> Make sure that the site is in the top 5 google search results
+        <li> Create a nice Ad, Landing page, and Email Copy
+    </p>
+
+    <p>I will not go into detail about how to build a website or SEO, but I will outline the process that it takes to make a good copy:</p>
+    <dl class="faq">
+        <dt>
+            <button type="button" aria-expanded="false" aria-controls="faq1_desc">
+                What is copywriting?
+            </button>
+        </dt>
+        <dd>
+            <div id="faq1_desc" class="desc">
+                Copywriting is sales where you deliver value over the bridge of trust.
+                <br><br>
+                You provide or promise value to a reader who may become a customer. You have first to build trust, pitch
+                them the idea, and after they buy, provide value and transform them into a recurring customer.
+                <br><br>“Whoever impacts the reader at the deepest level wins.”
+            </div>
+        </dd>
+        <dt>
+            <button type="button" aria-expanded="false" aria-controls="faq2_desc">
+                How people work. Why we need an avatar to sell to.
+            </button>
+        </dt>
+        <dd>
+            <div id="faq2_desc" class="desc">
+                If you try and help everyone, you’ll help no one. But if you focus on a defined group of people, you can
+                impact them profoundly.
+                <br><br>
+                You can even name your avatar and create a picture of your avatar in your head or search for one at
+                pexels.com.
+            </div>
+        </dd>
+        <dt>
+            <button type="button" aria-expanded="false" aria-controls="faq3_desc">
+                What to include when creating an avatar:
+            </button>
+        </dt>
+        <dd>
+            <div id="faq3_desc" class="desc">
+                <ul>
+                    <li> Name, age, and face. This makes it much easier for you to imagine them as accurate people.
+                    <li>Background and mini-life history. You need to understand the general context of their life and
+                        previous experience.
+                    <li>Day-in-the-life. If you can get a rough idea of what the average day in their life looks like,
+                        you will be able to relate more easily to them.
+                    <li>Values. What do they believe is more important? What do they despise?
+                    <li>Outside forces. What external forces or people does Avata feel most influenced by?
+                </ul>
+            </div>
+        </dd>
+        <dt>
+            <button type="button" aria-expanded="false" aria-controls="faq4_desc">
+                Humans only are compelled to take action for two main reasons:
+            </button>
+        </dt>
+        <dd>
+            <div id="faq4_desc" class="desc">
+                <ul>
+                    <li>They are running away from pain
+
+                    <li>They are running toward pleasure
+
+
+                </ul>
+                It’s our job as copywriters to understand both and combine them to propel them toward a better life.
+
+            </div>
+        </dd>
+
+
+
+        <dt>
+            <button type="button" aria-expanded="false" aria-controls="faq5_desc">
+                Running away from pain.
+            </button>
+        </dt>
+        <dd>
+            <div id="faq5_desc" class="desc">
+
+                You must ask yourself,
+
+
+                <ul>
+                    <li>“What is painful or frustrating in the current life of my Avatar?”
+                    <li> “What annoys them?”
+                    <li>“What do they fear?”
+                    <li> “What do they lie awake at night worrying about?”
+                    <li> “How do others negatively perceive them now?”
+
+
+                </ul>
+
+            </div>
+        </dd>
+
+        <dt>
+            <button type="button" aria-expanded="false" aria-controls="faq6_desc">
+                Running towards pleasure (Dream state)
+            </button>
+        </dt>
+        <dd>
+            <div id="faq6_desc" class="desc">
+                You must ask yourself,
+
+                <ul>
+                    <li>If they could wave a magic wand at their life and fix everything, what would their life look
+                        like?”
+                    <li>“What enjoyable new experiences would they have?”
+                    <li> “How would others perceive them in a positive light?”
+                    <li> “How would they feel about themselves if they made that change?”
+
+
+
+                </ul>
+                It’s our job as copywriters to understand both and combine them to propel them toward a better life.
+
+            </div>
+        </dd>
+
+
+        <dt>
+            <button type="button" aria-expanded="false" aria-controls="faq7_desc">
+                The reason why they don’t just live the life of their dreams is that:
+            </button>
+        </dt>
+        <dd>
+            <div id="faq7_desc" class="desc">
+                There are usually “Roadblocks” keeping them from moving to their dream state.
+                <br><br>
+                And if you can help them understand their obstacles better than they currently do, they’ll love you
+                forever.
+                <br><br>
+                To find the Roadblocks, you should ask yourself, “What is keeping my Avatar from getting what they want
+                now?”
+
+            </div>
+        </dd>
+
+
+        <dt>
+            <button type="button" aria-expanded="false" aria-controls="faq9_desc">
+                So, where does the product fit into all of this?
+            </button>
+        </dt>
+        <dd>
+            <div id="faq9_desc" class="desc">
+                The Product is the “vehicle” that helps the avatar take advantage of the solution. <br>
+                The Product makes it faster, safer, easier, and more fun to overcome the roadblock and make it to the
+                Dream State.
+
+            </div>
+        </dd>
+
+
+
+        <dt>
+            <button type="button" aria-expanded="false" aria-controls="faq4_desc1">
+                How Businesses Works
+            </button>
+        </dt>
+        <dd>
+            <div id="faq4_desc1" class="desc">
+
+                Why did YOU give someone else your money?
+                <br><br>
+                It’s because you believed you would get more value from the deal than the money you gave.
+                <br><br>
+                Everything in business and life trades a value exchange.
+                <br><br>
+                Unlimited money exists for people who can engineer mutually beneficial trades of value.
+
+                <br><br>
+                “People buy from others they know, like, and trust” - Galileo.
+                <br><br>
+                “Sales is a transfer of Belief over a bridge of Trust” - Alex Hormozi.
+
+
+
+
+            </div>
+        </dd>
+
+        <dt>
+            <button type="button" aria-expanded="false" aria-controls="faq4_desc2">
+                How do you get someone to trust you?
+            </button>
+        </dt>
+        <dd>
+            <div id="faq4_desc2" class="desc">
+                <b>Social proof</b><br>
+                Humans are social creatures. If you see the rest of your ‘“tribe” making a specific decision, you will
+                think they are right and follow their movements.
+                <br><br>
+                <b>Indicators of Authority </b><br>
+                Why do people trust Doctors? Or Presidents? Or CEOs?
+                <br><br>
+                <b>Indicators of Competency </b> <br>
+                If a business shows they know what they are talking about and then shows they even understand it at a
+                level more profound than the customer. Then you’re more likely to trust them.
+                <br><br>
+                <b>Relatability and Likeability </b> <br>
+                If they like you, can relate to you, or aspire to be like you, they will think, “He’s one of us,
+                ” and trust you.
+                <br><br>
+                Now you need to MAGNIFY that trust. You do that by “trading up.”
+                <br><br>
+                The more a business is trusted by its market, the more customers it will get, and the more it will be
+                able to sell them.
+
+
+        </dd>
+
+        <dt>
+            <button type="button" aria-expanded="false" aria-controls="faq4_desc3">
+                How do they establish trust with the reader?
+            </button>
+        </dt>
+        <dd>
+            <div id="faq4_desc3" class="desc">
+                <b>Social proof</b><br>
+                The writer states that many people have tried it and like the product. “It’s already helped thousands of
+                people find inspiration at the exact moment they need it.“
+                <br><br>
+                <b>Indicators of Authority </b><br>
+                The reader sees that many professionals worked on the product “Our team of expert neurobiologists and
+                doctors spent 1000s of hours researching, testing, and tinkering with the best formula for supporting
+                brain function long-term.”.
+                <br><br>
+                Twenty-eight ingredients make the product perfect in every aspect of body endeavor “provides 28
+                high-purity, biologically available ingredients that help improve the four areas.”
+
+                <br><br>
+
+                <b>Indicators of Competency </b><br>
+                The writer successfully explains how caffeine works and efficiently explains four areas where the
+                product will help the client—a 4 M explanation proves the Company’s competency in assisting the customer
+                needs. They add a 100% guarantee to expand this point.
+                <br><br>
+                <b>Relatability and Likeability </b><br>
+                If the reader likes you through the copy, can relate to you, or aspire to be like you, they will think,
+                “He’s one of us,” and trust you. “And with work-from-home, family responsibilities,
+                and more demands at work, that pressure is all too real. “
+
+            </div>
+        </dd>
+
+        <dt>
+            <button type="button" aria-expanded="false" aria-controls="faq4_desc4">
+                So, what do we look for when we research?
+            </button>
+        </dt>
+        <dd>
+            <div id="faq4_desc4" class="desc">
+                Determine who your target market is.<br>
+                Determine who a good Avatar would be for that unit.<br>
+                Seek to understand their current state.<br>
+                Seek to understand their dream state.<br>
+                Identify their crucial roadblock (That thing that’s keeping them from what they want).<br>
+                Then you’ll understand the solution that will give them the thing they like.<br>
+                Understand what the product is and how to frame it in a way that fits in with this sort of map of
+                reality. <br>
+
+            </div>
+        </dd>
+
+        <dt>
+            <button type="button" aria-expanded="false" aria-controls="faq4_des5">
+                Target Market
+            </button>
+        </dt>
+        <dd>
+            <div id="faq4_desc5" class="desc">
+
+
+                <ul>
+                    <li> What kind of person will get the most out of this product?
+
+                    <li>TWho are the best current customers with the highest LTV?
+
+                    <li>What attributes do they have in common?
+
+                </ul>
+
+            </div>
+        </dd>
+
+        <dt>
+            <button type="button" aria-expanded="false" aria-controls="faq4_desc6">
+                Avatar
+            </button>
+        </dt>
+        <dd>
+            <div id="faq4_desc6" class="desc">
+                <b>Name, age, and face. </b><br>This makes it much easier to imagine them as accurate, individual
+                people.
+                <br><br><b>ackground and mini-life history. </b><br>You need to understand the general context of their
+                life and previous experience.
+                <br><br><b>Day-in-the-life. </b><br>If you can get a rough idea of what the average day in their life
+                looks like, you will be able to relate more easily to them.
+                <br><br><b>Values.</b><br> What do they believe is more important? What do they despise?
+                <br><br><b>Outside forces. </b><br>What external forces or people does the Avatar feel influence their
+                life?
+
+
+            </div>
+        </dd>
+
+
+
+        <dt>
+            <button type="button" aria-expanded="false" aria-controls="faq4_desc7">
+               More questions to define you market
+            </button>
+        </dt>
+        <dd>
+            <div id="faq4_desc7" class="desc">
+                <br><br><b>Current State</b>
+
+                <li>What is painful or frustrating in the current life of my Avatar?
+                    <li>What annoys them?
+                        <li>What do they fear?
+                            <li>What do they lie awake at night worrying about?
+                                <li>How do others negatively perceive them now?
+                                    <li>What lack of status do they feel?
+                                        <li> What words do THEY use to describe their pains and frustration?
+                
+                
+                <br><br><b>Dream State</b>
+                
+                <li>What would their life look like if they could wave a magic wand at their life and fix everything?
+                <li>What enjoyable new experiences would they have?
+                <li>How would others perceive them in a positive light?
+                <li>How would they feel about themselves if they made that change?
+                <li>What words do THEY use to describe their dream outcome?
+                
+                
+                <br><br><b>Roadblocks</b>
+                
+                <li>What is keeping them from living their dream state today?
+                <li>What mistakes are they making that keep them from what they want in life?
+                <li>What part of the obstacle does the avatar not understand or know about? 
+                <li>What is the one key roadblock that will allow them to move toward their dream outcome once fixed? 
+                
+                <br><br><b>Solution</b>
+
+                <li>What does the avatar need to do to overcome the critical roadblock? 
+                “If they <insert solution>, then they will be able to <insert outcome>.”
+                
+                
+                
+                    <br><br><b>Product</b>
+                
+                    <li>How does the product help the avatar implement the Solution?
+                        <li> How does the product help the reader increase their chances of success? 
+                            <li>How does the product help the reader get the result faster?
+                                <li>How does the product help the reader get the result with less effort or sacrifice?
+                <li>What makes the product fun?
+                <li> What does your target market like about related products?
+                    <li> What does your target market hate about related products?
+                
+                                
+            </div>
+        </dd>
+        <dt>
+            <button type="button" aria-expanded="false" aria-controls="faq4_desc8">
+                Research Sources - where do I find answers to the questions above
+
+            </button>
+        </dt>
+        <dd>
+            <div id="faq4_desc8" class="desc">
+                <ul>
+                    <li>Clients and their customers. Just ask them, read their online testimonials, etc. 
+
+
+                    <li>Social Media. Watch youtube videos, read comments, and look for oversharing.
+
+
+                        <li>Amazon.com reviews. Look for books addressing a roadblock similar to yours. Read the 5-star 1, star reviews. 
+
+                            <li>Reddit. Look for community subreddits and collect their language and experiences. 
+
+                                <li>Quora. Find the questions and answers surrounding the problem your products solve.
+                                    <li>Google. You’ll be surprised at how much you can find with a simple Google search.
+                                        If you sell courses …. google weight loss books. 
+                                        
+                                        “If I only had an hour to chop down a tree, I would spend the first 45 minutes sharpening my axe.” - Abraham Lincoln 
+                </ul>
+                It’s our job as copywriters to understand both and combine them to propel them toward a better life. 
+
+            </div>
+        </dd>
+
+        <dt>
+            <button type="button" aria-expanded="false" aria-controls="faq4_desc9">
+                The Superpower Of Mystery
+            </button>
+        </dt>
+        <dd>
+            <div id="faq4_desc9" class="desc">
+                Weaponizing Attention and Curiosity <br>
+“He who controls the dopamine controls the universe.”
+<br><br>
+Opportunity (Something they want)<br>
+Threat (Something they fear) <br>
+<br><br>
+But whatever you choose, there should be a pot of Dopamine at the end of the rainbow. <br>
+Because Dopamine is what makes the world go round.<br><br>
+<br><br>
+Curiosity, Mystery, and Intrigue are like dumping gasoline on a fire.
+            </div>
+        </dd>
+
+
+        <dt>
+            <button type="button" aria-expanded="false" aria-controls="faq4_desc10">
+                How do you engineer curiosity? 
+            </button>
+        </dt>
+        <dd>
+            <div id="faq4_desc10" class="desc">
+                <b>Curiosity comes from information gaps.</b> <br>
+                It’s a low-grade anxiety that only can be resolved by answering unanswered questions.
+                <br><br>
+                And unsolved riddle in their mind that eats away at them. 
+                <br><br>
+                Recreate the feeling you get with a cliffhanger at the end of a high-drama tv show…
+                
+            </div>
+        </dd>
+
+        <dt>
+            <button type="button" aria-expanded="false" aria-controls="faq4_desc11">
+                Things that enhance curiosity 
+            </button>
+        </dt>
+        <dd>
+            <div id="faq4_desc11" class="desc">
+                <b>Specificity.</b><br> It needs to feel authentic in their mind. The more specific details you can share without giving away the answer, the better. 
+                <br><br><b>Not statements. </b><br>The reader will have the best guess as to what the “answer” is. If you tell him it’s NOT that thing… they’re mind will go into overdrive trying to figure it out. 
+                <br><br><b>I borrowed Status/Mystery.</b> <br>Secrets. Illuminati. Elon Musk. Ancient. Knowledge. Humans gravitate to the privileged and high status. 
+                <br><br><b>Unexplainable.</b> <br>If the reader can’t quite figure out how something has happened (only if they think it’s real), they will have to try and figure it out.
+                <br><br>
+                Win the battle for their attention and keep them hooked with constant curiosity. 
+                And then there is no limit to what you can get your reader to do. 
+                
+                
+            </div>
+        </dd>
+
+        <dt>
+            <button type="button" aria-expanded="false" aria-controls="faq4_desc12">
+                Fascinations 
+            </button>
+        </dt>
+        <dd>
+            <div id="faq4_desc12" class="desc">
+                The “Lego blocks” Of Copywriting 
+                <br><br>
+                Where do you use fascination? EVERYWHERE
+                <br><br>
+                A Fascination is a short line that combines desire with intrigue to create a potent effect in the reader's mind. 
+                <br><br>
+                Fascination will make the reader rabid to read the rest of your work and take action at the end. 
+                <br><br>
+                <b>Some examples: </b>
+                <br>“Wife Of Famous Movie Star Swears Under Oath Her New Parfume Does Not Contain An Illegal Sexual Stimulant!”
+                <br>“My Weird Hashtag Strategy That Helped Me Grow By 52,000 Followers in ONE MONTH!”
+                <br><br>
+                
+                Amazing Secret Discovered By One-Legged Golfer Adds 50 Yards To Your Drives, Eliminates Hooks and Slices… And you Can Slash Up To 10 Strokes From Your Game Almost Overnight! 
+                <br><br>
+                
+                Essentially all fascinations have two main elements. 
+                <br><br>
+                An implied opportunity or thread.<br>
+                Specific details make the reader think there is something tangible on the other side. 
+                
+            </div>
+        </dd>
+
+        <dt>
+            <button type="button" aria-expanded="false" aria-controls="faq4_desc13">
+                
+                    Fascination Formulas:
+            </button>
+        </dt>
+        <dd>
+            <div id="faq4_desc13" class="desc">
+                <br><br><b>How to.</b><br> How to become a $10k/mo copywriter as quickly as possible. 
+                <br><br><b>Secret to.</b><br> The secret to writing killer fascinations every time you sit down at your computer.
+                <br><br><b>Why.</b><br> Why do most billionaires exactly start their day?
+                <br><br><b>What.</b><br> What to do if you want to land your first copywriting client in less than 30 days. 
+                <br><br><b>What NEVER.</b><br> What NEVER to say on a first date if you like the girl?
+                <br><br><b>PLUS.</b><br> PLUS, the phrase that will make her blush, smile, and fall deeply in love with you. 
+                <br><br><b>Number.</b><br> Seven steps that will guarantee you will reach your pushup goal each day.
+                <br><br><b>…Right? WRONG…</b><br> Working hard is what will guarantee your success, right? WRONG. Why working wise will never be enough and what you need to do instead.
+                <br><br><b>Warning. </b><br>WARNING - Don’t email another client until you learn this new upsell question that will dramatically increase your closing price. 
+                <br><br><b>Are you?... </b><br>Are you afraid you’ll get stuck with a depressing “white picket fence” life if you don’t make real money NOW?
+                <br><br><b>Gimmick </b><br>The writing “hack” that will force your reader to pay attention to Every. Single. Word.
+                <br><br><b>Sneaky. </b><br>The sneaky headline formula will break your reader’s mind and double or even triple your sales.
+                <br><br><b>Direct benefit.</b><br> BECOME THE STRONGEST MAN IN YOUR GYM IN 30 DAYS OR LESS. 
+                <br><br><b>Specific question.</b><br> Did you know that 99% of billionaires used the same strategy to make their first real money?
+                <br><br><b>If…. Then… </b><br>If you are tired of falling flat on your face when talking to that beautiful girl, then you need to learn the seven questions that will interest any girl wildly.
+                <br><br><b>When. </b><br>When eating chocolate will boost your fat loss. 
+                <br><br><b>Quickest, Easiest.</b><br> The quickest way to boost your confidence and get that millionaire “glow.”
+                <br><br><b>Truth. </b><br>The truth about trading crypto will ensure you’re on the right side of history.
+                <br><br><b>Better than. </b><br>Better than caffeine. Discover the best (legal) supplement for greater focus and discipline. 
+                <br><br><b>Single. </b><br>The single step you must take before all of your sales calls is to maintain frame and close like the Wolf Of Wall Street. 
+                
+            </div>
+        </dd>
+
+        <dt>
+            <button type="button" aria-expanded="false" aria-controls="faq4_desc14">
+                How to start writing facinations
+            </button>
+        </dt>
+        <dd>
+            <div id="faq4_desc14" class="desc">
+                After research, you’ll usually write at least 100 fascinations to use as ammunition during your project.
+                <br><br>
+Take note of the exciting fascinations you see “out there in the wild” and save them for future reference. 
+<br><br>
+The best copywriters in the world are all masters at the art of writing fascination.
+
+<br><br><br><br>
+
+The creative thinking process
+<br><br>
+
+When you hit a dead end, you must ensure enough clarity on the Avatar, Problems, Desires, Roadblocks, Solutions, and Product. 
+If you don’t have enough ammunition for the subconscious to draw on, the creative process stops dead in its tracks. 
+<br><br>
+Too harsh of a filter too early on. 
+<br><br>
+Whenever your subconscious comes up with an idea, it gets smacked down by the filter part of your brain. Then your subconscious mind tends not to want to come up with more ideas. Permit yourself to let the ideas flow, good or bad.
+<br><br>
+For example, permit yourself to write 100 TERRIBLE fascinations without filtering them out.
+<br><br>
+In the end, you’ll discover that after you let your subconscious brain run free, you came up with some pretty good ideas.
+<br><br><br><br>
+
+The brain is over-taxed.
+<br><br>
+The mind can get worn down if you’ve been doing Deep Work sessions. 
+<br><br>
+The reset break in between Deep Work Sessions is crucial. It is work. 
+If you’re redlining your brain, get up and walk. You’ll be amazed at how many breakthroughs you’ll have on a walk or in the shower. 
+<br><br>
+Creativity is a skill. Develop it, and you’ll never face a challenge you can’t overcome. 
+<br><br><br><br>
+How To Evaluate And Improve Your Writing
+<br><br>
+It’s not enough to brain-dump ideas onto a Google Doc.
+<br><br>
+You need to review your work and improve it until you are confident it will achieve the desired results.
+<br><br>
+Writing is an iterative process: 
+<br><br>
+Observe → Orient → Decide → Act → Observe → Orient → Decide → Act →, etc.
+
+            </div>
+        </dd>
+
+        <dt>
+            <button type="button" aria-expanded="false" aria-controls="faq4_desc15">
+               How to improve your facinations and copy
+            </button>
+        </dt>
+        <dd>
+            <div id="faq4_desc15" class="desc">
+                <br><br><b>Step 1: Read your copy out loud.</b>
+
+                Using your voice allows you to detach enough from creating your copy to identify issues. <br>
+                You’ll notice clunky or weird parts when read out loud. 
+                
+                <br><br><b> Step 2: Imagine how the Avatar will perceive the writing</b>
+                “What effect will this create in the reader’s mind?”<br>
+                “What can I do to trigger the effect I want in the reader’s mind here?”
+                
+                <br><br><b>Step 3: Grammar and spelling check.</b>
+                Grammar and spelling errors will make you look like an amateur in your reader's eyes. <br>
+                “If this is how badly he writes, I wonder how bad the product he’s selling is?”<br>
+                (Use grammarly.com, hemingwayapp.com, and other tools to ensure perfect grammar and spelling.) 
+                
+            </div>
+        </dd>
+
+        <dt>
+            <button type="button" aria-expanded="false" aria-controls="faq4_desc16">
+               Examples of better facinations
+            </button>
+        </dt>
+        <dd>
+            <div id="faq4_desc16" class="desc">
+                <br>Better than caffeine in a cheaper and healthier way
+                <br>Life is better when you live by the letter.
+                <br>Better than Adderall with no Drawbacks!
+                <br>Better than Racking your brain with questions!
+                <br>Better than discipline: this trick will allow you to work consistently every day
+                <br>This is the simplest way to get more motivated.
+                <br>Have you tried this Inspiration-in-a-bottle supplement yet?
+                <br> Better than discipline and motivation, EMPOWERMENT!
+                <br>Never a better time/choice to feed your brain!
+                <br> Better than caffeine - a supplement that allows you to have some discipline in your life.
+                <br>The truth every boss wishes they knew
+                <br>The truth about ‘Getting in the zone”-explained by David Goggins
+                <br> The truth about achieving mental clarity (that will cure your laziness)
+                <br>The truth behind all successful copywriters
+                <br>Life is short; that's the truth. make the most of it with a qualia mind
+                <br>Sometimes in life, the quickest ways to change aren't always the easiest. Qualia mind is the exception.
+                <br>The quickest way to penetrate through laziness
+                <br>If you’re tired of throwing back several cups of coffee each day, try this supplement with naturally derived ingredients to supercharge your productivity AND creativity.
+                <br>If you don't try, then you will never know
+                <br>New and improved you on the way!!!
+                <br>The sneaky headline will make you think, “this really can’t be ‘miracle brain grow’ in a bottle.”
+                <br>Your prayers have been answered!
+                <br>Be able to smash your keyboard and make art in a matter of seconds
+                <br>CIA is trying to destroy all supplies we have left
+                <br>The sneaky trick that coffee lovers are using for endless energy
+                <br>how this sneaky lie can unleash your success 
+                <br>Like John Wick. Become a man of focus, commitment, and sheer. Freaking. Will
+                <br>The “silver bullet” to maximizing your ability to concentrate FOREVER
+                <br>Buy this pill before the government finds out and it turns illegal
+                <br>The truth about mental gains is HERE. CLICK NOW! pump it now
+
+                <br>WARNING! We’re not liable for the fixed expense of subscribing to this life-changing decision for life.
+                <br>WARNING - don’t fail that assignment 
+                <br>WARNING- Don’t use this product; you might experience a positive change!
+                <br>There isn't such a thing as a "smart" pill, right? WRONG!
+                <br>Warning! People you work with may become jealous of your new superpowers!
+                <br>Supplements are for gays, right? Wrong! They're for everyone! ;)
+                <br>Motivation is key to success, right? WRONG
+                <br>One simple step toward a new beginning!
+                <br>One supplement, A thousand benefits.
+                <br>The most critical day-to-day habit you're missing out on
+                <br>What's cooler than a video game? (#money)
+                <br>What do we want? More money! How do we get it? Key vital nutrients!
+                <br>What "Artificial" inspiration looks like.
+                <br>What you never thought was possible, Actually is!
+                <br>Why do all productive mums start the day the same way
+                <br>Why "Waiting for your muse" is a fantasy!
+                <br>(That’s )Why coffee just won't cut it anymore!
+                <br>The Secret to Leveling Up to a Higher Tax Bracket
+                <br>The One Secret to Rule Them All 
+                <br>The secret to writing 100 fascinations quickly WITHOUT doing pushups
+                <br>The secret to having a life worth living
+                <br>The secret to never feeling like you are spinning your wheels again 
+                <br>How to stimulate GREATNESS with just the click of a button.
+                <br>How to be a WINNER and go through daily activities with a SMILE on your face!
+                <br>The Ultimate “How To” Guide to Creating an Unsuccessful Business
+                <br>Vastly superior to any simple cup of coffee. 
+                <br>Redeem control over your mind
+                <br>Grab your time by the hair 
+                <br>The cheat code to climbing the ladder of success
+                <br> Sharpen your pencil
+                <br> Your ticket to a better creative flow.
+                <br> An ancient method, now remade, used to get your brain to work at a  100%
+                <br> AROUSE your DOPAMINE and get CREATIVE.
+                <br>(It’s time to) Vaccinate that laziness disease
+                <br> The shortcut to getting home early 
+                <br>Make your mind create a path towards success.
+                <br>Become determined to ditch that work assignment before kids wake up
+                <br> When “magic in a bottle” actually means what it says.
+                
+            </div>
+        </dd>
+
+
+        <dt>
+            <button type="button" aria-expanded="false" aria-controls="faq4_desc19">
+               Want even more?
+            </button>
+        </dt>
+        <dd>
+            <div id="faq4_desc19" class="desc">
+               Check my google doc where I did an test research and left even more notes for Writing Copy.<br>
+              <a href="https://docs.google.com/document/d/1AAlC8qvufTPcegRQLDuDSvzBR3heDLFuJ55YLcDWbFU/edit?usp=sharing">Here</a> 
+            </div>
+        </dd>
+    </dl>
+</body>
+

@@ -1,0 +1,476 @@
+/* font-family: Hellix, I've installed for you */
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600;700;800&display=swap');
+
+* {
+    margin: 0;
+  }
+body {
+    min-width: 100%;
+    height: 100vh;
+    font-family: "Lato";
+    text-align: center;
+    background: yellow;
+  }
+  #outer {
+    display: flex;
+    justify-content: center;
+  }
+  #Container {
+    width: 414px;
+    
+    background: #E5E5E5;
+    background: linear-gradient(7.28deg, #EEF5FF 0%, #FFFFFF 99.69%);
+  }
+  #email{
+    color: black;
+    border:none;
+    width: 56%;
+    padding: 13px 15px;
+    border-radius: 5px;
+    background-image:     url('https://assets.codepen.io/6060109/icon-send.png');
+    background-repeat: no-repeat;
+    background-position: 95% center;
+     
+    
+  }
+  #logoContainer {
+    width: 100%;
+    background: white;
+    height: 75px;
+  
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04), 0px 2px 6px rgba(0, 0, 0, 0.04),
+      0px 0px 1px rgba(0, 0, 0, 0.04);
+  }
+  .menu{
+    display:none;
+  }
+  
+  .logoText {
+    padding-top: 22px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 36px;
+  
+    color: #111235;
+  }
+  
+  #naslov-text {
+    font-family: "Lato";
+    font-style: normal;
+    margin-right: 40px;
+    font-weight: 500;
+    margin-bottom: 30px;
+  }
+  ol{
+    
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    lign-items: space-around;
+    margin-left: -20px;
+  }
+  ol il{
+    padding: 20px 0 ;
+    
+    font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+    
+  /* identical to box height, or 150% */
+  
+  
+  color: #111235;
+  }
+  
+  #secondContainer img {
+    padding-bottom: 20px;
+  }
+  
+  .img {
+    width: 100%;
+  }
+  
+  .hText {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 64px;
+    line-height: 75px;
+    color: #111235;
+  }
+  .subtext {
+    padding-top: 20px;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    /* identical to box height, or 133% */
+  
+    text-align: center;
+    color: #111235;
+  }
+  .h2Text {
+    font-size: 48px;
+    line-height: 57.61px;
+    font-weight:500;
+  
+  }
+  #naslov-text {
+    background: #f2f8ff;
+    width:100%;
+  }
+  p {
+    margin-bottom: 50px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #111235;
+  }
+  
+  .blue {
+    background: #4b5092;
+    color: #ffffff;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+  .white {
+    background: #ffffff;
+    color: #436baa;
+  }
+  
+  .btn {
+    display: block;
+    width: 225px;
+    height: 59px;
+    margin: 20px auto;
+  
+    text-decoration: none;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    border-radius: 35px;
+    /* identical to box height */
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+  }
+  
+  #naslov-text * {
+    text-align: left;
+  }
+  
+  .thirdContainer {
+    background: linear-gradient(99.85deg, #bad5ff 0%, #6487bf 100%);
+  }
+  .text-center {
+    text-align: center;
+  }
+  .icons2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin:0;
+  }
+  
+  .icons img{
+    width:60%;
+  }
+  .icons{
+    display:block;
+    background-color: rgba(128, 173, 245, 0.2);
+    width: 32px;
+    margin: 15px 10px;
+  height: 32px;
+    border-radius:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .balon {
+    display: block;
+    background: yellow;
+    border-radius: 30px;
+    width: 382px;
+    height: 274px;
+    display: flex;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .vbalonu {
+    height: 300px;
+    width: 286px;
+    text-align: left;
+    margin-left: 40px;
+    margin-top: 50px;
+  }
+  
+  .balon h2 {
+    font-family: "Lato";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    margin-bottom: 15px;
+  
+    color: #111235;
+    
+  }
+  .mobile{
+    display: block;
+  }
+  .desktop{
+    display: none;
+  }
+  
+  
+  /** single line classes **/
+  
+  .bold {
+    font-weight: 700;
+  }
+  .mb-100 {
+    margin-bottom: 100px;
+  }
+  .mb-50 {
+    margin-bottom: 50px;
+  }
+  .mt-50 {
+    margin-top: 50px;
+  }
+  .pt-50 {
+    padding-top: 50px;
+  }
+  .pb-50 {
+    padding-bottom: 50px;
+  }.pb-100 {
+    padding-bottom: 100px;
+  }
+  .pb-n5 {
+    margin-bottom: -5px;
+  }
+  .mlr-15 {
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+  .mtb-15 {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  .text-left {
+    text-align: left;
+  }
+  .moder {
+    background: #e4f0ff;
+  }
+  .vijolcen {
+    background: rgba(114, 122, 239, 0.1);
+  }
+  
+  .border-bottom{
+    border-bottom: 1px solid black;
+  }
+   .mobile{
+    display: flex;
+  }
+    .desktop{
+    display: none;
+      
+  }
+  
+   footer ul{
+      display: flex;
+      flex-direction: column; 
+     margin-left:-30px;
+  
+  
+    }
+  
+  footer ul il{
+      margin: 18px 0 ;
+    
+  
+  
+    }
+  
+  #forthContainer .content1{
+    display:block;
+  }
+  /* Large devices (laptops/desktops, 992px and up) */
+  @media only screen and (min-width: 992px) {
+    #logoContainer {
+    display:flex;
+     justify-content: space-around;
+    width: 100%;
+    background: white;
+    height: 75px;
+    
+  }
+    
+    .menu{
+      display:flex;
+      justify-content:        space-around;
+      align-items: center;
+    }
+    ul il{
+      padding: 0 10px;
+    }
+    
+    #Container {
+    width: 100%;
+    }
+    
+    #firstContainer{
+      display:flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      margin: 35px 80px;
+     
+    }
+    #firstContainer img{
+      width:45%;
+    }
+    #firstContainer *{
+      text-align: left;
+      
+    }
+    #firstContainer .content{
+      display:flex;
+      flex-direction: column;
+      align-items: left;
+      justify-content: left;
+      
+    }
+    #secondContainer{
+      display:flex;
+      align-items: center;
+      margin: 35px 80px;
+     
+    }
+    #secondContainer #naslov-text{
+      padding: 30px 20px;
+      border-radius: 30px
+    }
+    
+    .thirdContainer{
+      display:flex;
+      align-items: center;
+      flex-direction: row-reverse;
+      padding: 0 50px;
+     
+    }
+    .thirdContainer img{
+      padding: 5px;
+     
+    }
+  .thirdContainer *{
+    text-align: left;
+    
+     
+    }
+    
+   .thirdContainer h3 {
+    text-align: left;
+     margin-left: 15px;
+        margin-bottom: 20px;
+    }
+    .mobile{
+    display: none;
+  }
+    .desktop{
+    display: flex;
+      
+      
+  }
+    .btn{
+      margin:0;
+    }
+    .mobile-content{
+      display:flex;
+      align-items: center;
+      justify-content:        space-around;
+  
+    }
+    
+  
+    
+     footer{
+      display: flex;
+       justify-content:        center;
+  
+    }
+  
+    footer ul{
+      display: flex;
+      flex-direction: column; 
+      flex-wrap: wrap;
+      height:200px;
+  
+  
+    }
+    
+  
+    
+    
+    .icons2{
+      display:none;
+    }
+  footer > p{
+    width: 30%;
+  
+  }
+  
+  footer ul{
+    width: 30%;
+  
+  }
+  
+  footer il{
+    margin: 20px 0;
+    
+  }
+  footer > #bottomEmail{
+    width: 33%;
+    margin:0;
+  
+  }
+  
+  footer p , .fifthContainer > p{
+    text-align:left;
+  }
+  
+  .fifthContainer > p{
+    margin-left:30px;
+  }
+  
+  #forthContainer{
+    display:flex;
+    flex-direction: column; 
+  
+    
+  }
+  #forthContainer .content1{
+    display:flex;
+   flex-direction: row-reverse;
+    margin: 10px 80px;
+    
+  }
+    
+  #forthContainer .content{
+    display:flex;
+     flex-wrap: wrap;
+  
+    
+  }
+  .content1 img{
+    width:63%;
+  }
+  
+  .content1 .balon{
+    margin:20px 5px;
+    
+  }
+    
+  }
+  

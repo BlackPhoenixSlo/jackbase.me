@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>OnlyFans Application Form - Jaka Basej</title>
+  <meta content="Fill out your OnlyFans application form and get a pre-filled Telegram message to send." name="description">
+  <meta content="OnlyFans Application Form - Jaka Basej" property="og:title">
+  <meta content="Fill out your OnlyFans application form and get a pre-filled Telegram message to send." property="og:description">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <link href="css/normalize.css" rel="stylesheet" type="text/css">
+  <link href="css/webflow.css" rel="stylesheet" type="text/css">
+  <link href="css/jack-base-portfolio.webflow.css" rel="stylesheet" type="text/css">
+  <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon">
+  <link href="images/webclip.png" rel="apple-touch-icon">
+  <style>
+    * {
+      -webkit-font-smoothing: antialiased; 
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    .form-container {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 40px 20px;
+    }
+    
+    .form-card {
+      background: white;
+      border-radius: 20px;
+      padding: 50px 40px;
+      max-width: 800px;
+      margin: 0 auto;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    }
+    
+    .form-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .form-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      color: white;
+      font-size: 40px;
+    }
+    
+    .form-title {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 15px;
+      color: #333;
+    }
+    
+    .form-subtitle {
+      font-size: 1.1rem;
+      color: #666;
+      line-height: 1.6;
+    }
+    
+    .form-section {
+      margin-bottom: 40px;
+    }
+    
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #667eea;
+    }
+    
+    .form-group {
+      margin-bottom: 25px;
+    }
+    
+    .form-label {
+      display: block;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 8px;
+      font-size: 1rem;
+    }
+    
+    .form-input, .form-textarea, .form-select {
+      width: 100%;
+      padding: 15px;
+      border: 2px solid #e1e5e9;
+      border-radius: 10px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+      box-sizing: border-box;
+    }
+    
+    .form-input:focus, .form-textarea:focus, .form-select:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+    
+    .form-textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+    
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    
+    .submit-button {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 18px 40px;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+      width: 100%;
+      margin-top: 20px;
+    }
+    
+    .submit-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+    }
+    
+    .submit-button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    .result-section {
+      display: none;
+      background: #f8f9fa;
+      border-radius: 15px;
+      padding: 30px;
+      margin-top: 30px;
+      border-left: 4px solid #667eea;
+    }
+    
+    .result-title {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    
+    .telegram-link {
+      background: #0088cc;
+      color: white;
+      padding: 15px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      display: inline-block;
+      margin: 10px 0;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .telegram-link:hover {
+      background: #0077b3;
+      transform: translateY(-1px);
+    }
+    
+    .copy-button {
+      background: #28a745;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      margin-left: 10px;
+      transition: all 0.3s ease;
+    }
+    
+    .copy-button:hover {
+      background: #218838;
+    }
+    
+    .copy-button.copied {
+      background: #6c757d;
+    }
+    
+    .back-link {
+      text-align: center;
+      margin-top: 30px;
+    }
+    
+    .back-link a {
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    
+    .back-link a:hover {
+      color: #5a6fd8;
+    }
+    
+    @media (max-width: 768px) {
+      .form-card {
+        padding: 30px 20px;
+      }
+      
+      .form-title {
+        font-size: 2rem;
+      }
+      
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .section-title {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <div class="form-card">
+      <div class="form-header">
+        <div class="form-icon">📝</div>
+        <h1 class="form-title">OnlyFans Application</h1>
+        <p class="form-subtitle">
+          Fill out the form below and get a pre-filled Telegram message to send to Jaka Basej. This will help us get to know you better and start the application process.
+        </p>
+      </div>
+      
+      <form id="applicationForm">
+        <div class="form-section">
+          <h2 class="section-title">Basic Information</h2>
+          
+          <div class="form-group">
+            <label class="form-label">Instagram Handle</label>
+            <input type="text" class="form-input" id="instagram" name="instagram" placeholder="@yourusername">
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Tell us your story</label>
+            <textarea class="form-textarea" id="story" name="story" placeholder="Tell us about yourself, your background, and why you want to join OnlyFans..."></textarea>
+          </div>
+        </div>
+        
+        <div class="form-section">
+          <h2 class="section-title">Personal Details</h2>
+          
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">OF Stage Name / ID *</label>
+              <input type="text" class="form-input" id="ofName" name="ofName" placeholder="Your OnlyFans name" required>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Age *</label>
+              <input type="number" class="form-input" id="age" name="age" placeholder="Your age" min="18" max="99" required>
+            </div>
+          </div>
+          
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Home Country *</label>
+              <input type="text" class="form-input" id="country" name="country" placeholder="Your country" required>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Hometown *</label>
+              <input type="text" class="form-input" id="hometown" name="hometown" placeholder="Your hometown or city" required>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Job/Hobby *</label>
+            <input type="text" class="form-input" id="job" name="job" placeholder="What do you do for work or as a hobby?" required>
+          </div>
+        </div>
+        
+        <div class="form-section">
+          <h2 class="section-title">Content Preferences</h2>
+          
+          <div class="form-group">
+            <label class="form-label">Customs (What is your limit?) *</label>
+            <textarea class="form-textarea" id="customs" name="customs" placeholder="What type of content are you comfortable with? Any limits or preferences?" required></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Video Calls *</label>
+            <select class="form-select" id="videoCalls" name="videoCalls" required>
+              <option value="">Select an option</option>
+              <option value="Yes, I'm interested">Yes, I'm interested</option>
+              <option value="Maybe, depends on the details">Maybe, depends on the details</option>
+              <option value="No, not interested">No, not interested</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Ass Play *</label>
+            <select class="form-select" id="assPlay" name="assPlay" required>
+              <option value="">Select an option</option>
+              <option value="Yes, I'm comfortable with this">Yes, I'm comfortable with this</option>
+              <option value="Maybe, with limits">Maybe, with limits</option>
+              <option value="No, not interested">No, not interested</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">BB/BG *</label>
+            <select class="form-select" id="BBBG" name="BBBG" required>
+              <option value="">Select an option</option>
+              <option value="Yes, I'm interested">Yes, I'm willing to do it</option>
+              <option value="Maybe, depends on the details">Maybe, depends on the details</option>
+              <option value="No, not interested">No, not interested</option>
+            </select>
+          </div>
+        </div>
+        
+        <button type="submit" class="submit-button">Generate Telegram Message</button>
+      </form>
+      
+      <div id="resultSection" class="result-section">
+        <h3 class="result-title">Your Telegram Message is Ready!</h3>
+        <p>Click the link below to open Telegram with your pre-filled application message:</p>
+        <a id="telegramLink" class="telegram-link" target="_blank" rel="noopener noreferrer">
+          📱 Open Telegram with Application
+        </a>
+        <button id="copyButton" class="copy-button">Copy Link</button>
+        <p style="margin-top: 20px; font-size: 0.9rem; color: #666;">
+          <strong>Note:</strong> The link will open Telegram with all your information pre-filled. Simply click send to submit your application!
+        </p>
+      </div>
+      
+      <div class="back-link">
+        <a href="index.html">← Back to Portfolio</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('applicationForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Get all form values
+      const formData = new FormData(this);
+      const data = Object.fromEntries(formData);
+      
+      // Create the message text
+      let message = "Hi, I'm Jack, a Cuban salsa enthusiast and passionate OnlyFans business owner.\n\n";
+      message += "Please answer these four questions:\n\n";
+      message += "1. What is your Instagram handle?\n";
+      message += "2. What is your story?\n\n";
+      message += "Also, please answer these 10 quick questions (feel free to make up answers):\n\n";
+      message += "OF Stage name / ID?\n";
+      message += "Age:\n";
+      message += "Home country:\n";
+      message += "Hometown:\n";
+      message += "Job/hobby:\n\n";
+      message += "Customs? (What is a limit?)\n\n";
+      message += "Video calls?\n\n";
+      message += "Ass play?\n";
+      message += " BB/BG?\n\n";
+      message += "I don't need more than this.\n\n";
+      message += "--- MY ANSWERS ---\n\n";
+      
+      // Add user's answers - only for fields that actually exist in the form
+      message += `Instagram: ${data.instagram || 'Not provided'}\n`;
+      message += `Story: ${data.story || 'Not provided'}\n\n`;
+      message += `OF Name/ID: ${data.ofName || 'Not provided'}\n`;
+      message += `Age: ${data.age || 'Not provided'}\n`;
+      message += `Country: ${data.country || 'Not provided'}\n`;
+      message += `Hometown: ${data.hometown || 'Not provided'}\n`;
+      message += `Job/Hobby: ${data.job || 'Not provided'}\n\n`;
+      message += `Customs: ${data.customs || 'Not provided'}\n\n`;
+      message += `Video Calls: ${data.videoCalls || 'Not provided'}\n\n`;
+      message += `Ass Play: ${data.assPlay || 'Not provided'}\n`;
+      message += `BB/BG: ${data.BBBG || 'Not provided'}`;
+      
+      // Encode the message for URL
+      const encodedMessage = encodeURIComponent(message);
+      const telegramUrl = `https://t.me/jakabasej?text=${encodedMessage}`;
+      
+      // Update the link
+      document.getElementById('telegramLink').href = telegramUrl;
+      
+      // Show the result section
+      document.getElementById('resultSection').style.display = 'block';
+      
+      // Scroll to result section
+      document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
+    });
+    
+    // Copy link functionality
+    document.getElementById('copyButton').addEventListener('click', function() {
+      const telegramLink = document.getElementById('telegramLink').href;
+      navigator.clipboard.writeText(telegramLink).then(function() {
+        const button = document.getElementById('copyButton');
+        button.textContent = 'Copied!';
+        button.classList.add('copied');
+        
+        setTimeout(function() {
+          button.textContent = 'Copy Link';
+          button.classList.remove('copied');
+        }, 2000);
+      });
+    });
+  </script>
+</body>
+</html> 

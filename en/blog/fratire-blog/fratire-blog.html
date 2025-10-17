@@ -1,496 +1,919 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" hreflang="en">
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fratire Blog - Jack Basej</title>
-    <link rel="stylesheet" href="../../css/normalize.css">
-    <link rel="stylesheet" href="../../css/webflow.css">
-    <link rel="stylesheet" href="../../css/jack-base-portfolio.webflow.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
-    <style>
-        .blog-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            font-family: 'Inter', sans-serif;
-        }
-        .blog-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-        .blog-title {
-            font-size: 3rem;
-            font-weight: 700;
-            color: #1a1a1a;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-        .blog-subtitle {
-            font-size: 1.2rem;
-            color: #666;
-            margin-bottom: 30px;
-        }
-        .blog-image {
-            width: 100%;
-            max-width: 600px;
-            height: auto;
-            border-radius: 12px;
-            margin: 40px auto;
-            display: block;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-        .blog-content {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #333;
-            margin-bottom: 40px;
-        }
-        .blog-content h2 {
-            font-size: 2rem;
-            font-weight: 600;
-            color: #1a1a1a;
-            margin: 50px 0 20px 0;
-        }
-        .blog-content h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #1a1a1a;
-            margin: 30px 0 15px 0;
-        }
-        .blog-content p {
-            margin-bottom: 20px;
-        }
-        .blog-content ul {
-            margin: 20px 0;
-            padding-left: 30px;
-        }
-        .blog-content li {
-            margin-bottom: 10px;
-        }
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            color: #666;
-            text-decoration: none;
-            font-size: 1rem;
-            margin-bottom: 40px;
-            transition: color 0.3s ease;
-        }
-        .back-link:hover {
-            color: #1a1a1a;
-        }
-        .back-arrow {
-            margin-right: 8px;
-            font-size: 1.2rem;
-        }
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 60px;
-        }
-        .blog-card {
-            background: #fff;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .blog-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-        }
-        .blog-card-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-        .blog-card-content {
-            padding: 25px;
-        }
-        .blog-card-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #1a1a1a;
-            margin-bottom: 15px;
-            line-height: 1.4;
-        }
-        .blog-card-excerpt {
-            color: #666;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-        .blog-card-link {
-            color: #1a1a1a;
-            text-decoration: none;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            transition: color 0.3s ease;
-        }
-        .blog-card-link:hover {
-            color: #666;
-        }
-        .blog-card-arrow {
-            margin-left: 8px;
-            transition: transform 0.3s ease;
-        }
-        .blog-card-link:hover .blog-card-arrow {
-            transform: translateX(5px);
-        }
-        .highlight-box {
-            background: #f8f9fa;
-            border-left: 4px solid #1a1a1a;
-            padding: 25px;
-            margin: 30px 0;
-            border-radius: 0 8px 8px 0;
-        }
-        .highlight-box h3 {
-            margin-top: 0;
-            color: #1a1a1a;
-        }
-        .highlight-box p {
-            margin-bottom: 0;
-        }
-        .quote {
-            font-style: italic;
-            font-size: 1.2rem;
-            color: #666;
-            text-align: center;
-            margin: 40px 0;
-            padding: 30px;
-            background: #f8f9fa;
-            border-radius: 12px;
-        }
-        .quote::before {
-            content: '"';
-            font-size: 3rem;
-            color: #ddd;
-            display: block;
-            margin-bottom: 10px;
-        }
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin: 40px 0;
-        }
-        .stat-item {
-            text-align: center;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 12px;
-        }
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #1a1a1a;
-            display: block;
-        }
-        .stat-label {
-            color: #666;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .cta-section {
-            background: #1a1a1a;
-            color: white;
-            padding: 60px 40px;
-            border-radius: 12px;
-            text-align: center;
-            margin: 60px 0;
-        }
-        .cta-title {
-            font-size: 2rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-        .cta-text {
-            font-size: 1.1rem;
-            margin-bottom: 30px;
-            opacity: 0.9;
-        }
-        .cta-button {
-            display: inline-block;
-            background: white;
-            color: #1a1a1a;
-            padding: 15px 30px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: transform 0.3s ease;
-        }
-        .cta-button:hover {
-            transform: translateY(-2px);
-        }
-        @media (max-width: 768px) {
-            .blog-container {
-                padding: 20px 15px;
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+  
+    
+    <title>Fratire blog - In Stories We Trust</title>
+    <meta name="description" content="I don't apologize about me being a man.'" />
+
+   
+   
+    <link rel='stylesheet' id='stylesheet-css'
+        href='https://etzq49yfnmd.exactdn.com/wp-content/themes/priceonomics/style.css?m=1667504193' type='text/css'
+        media='all' />
+
+
+    <noscript>
+        <style>.lazyload[data-src] {
+                display: none !important;
             }
-            .blog-title {
-                font-size: 2.5rem;
-            }
-            .blog-content {
-                font-size: 1rem;
-            }
-            .blog-content h2 {
-                font-size: 1.8rem;
-            }
-            .blog-content h3 {
-                font-size: 1.3rem;
-            }
-            .blog-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .cta-section {
-                padding: 40px 20px;
-            }
-            .cta-title {
-                font-size: 1.8rem;
-            }
+        </style>
+    </noscript>
+    <style>.lazyload {
+            background-image: none !important;
+        }
+
+        .lazyload:before {
+            background-image: none !important;
         }
     </style>
+     
 </head>
-<body>
-    <div class="blog-container">
-        <a href="../blog.html" class="back-link">
-            <span class="back-arrow">←</span>
-            Back to Blog
-        </a>
-        
-        <div class="blog-header">
-            <h1 class="blog-title">Fratire Blog</h1>
-            <p class="blog-subtitle">A collection of stories, insights, and experiences from the world of dating and personal development</p>
-            <img src="images/collage.png" alt="Fratire Blog Collage" class="blog-image">
+
+<body style="background-color:floralwhite;" class="blog wp-custom-logo">
+    <div class="topnav">
+        <p style="margin-left: 130px"> young guys want to have sex, Unprotected sex, and not pulling out feels good. This implies that men want to make girls pregnant, not necessarily care for them (young boys). Live/Society tries hard not to say this overtly. Implies THAT this is wrong. It just is. People have two personalities. Their body and their brain. Did you humb your bed before realizing it? Did you leak your wound after the fall and right after you went for it "I guess I can lick my wound," thought appeared?</p>
       </div>
+    <a href="../../home.html" ><img style="position: absolute; width: 120px; left: 0; top:0" src="../../../images/JACK%20BASE%20(2).png"></a>
 
-        <div class="blog-content">
-            <p>Welcome to the Fratire Blog – a space where I share my journey through the world of dating, personal development, and the lessons learned along the way. These stories are raw, unfiltered, and sometimes controversial, but they're all real experiences that have shaped who I am today.</p>
-
-            <p>From awkward first encounters to life-changing realizations, from the streets of Ljubljana to the beaches of Morocco, these blog posts capture the essence of what it means to navigate the modern dating landscape as a young man trying to figure it all out.</p>
-
-            <div class="highlight-box">
-                <h3>What You'll Find Here</h3>
-                <p>Real stories from real experiences, practical advice on dating and social dynamics, personal reflections on growth and self-improvement, and honest takes on controversial topics that most people won't discuss openly.</p>
+   
+    <div id="all-content">
+        <div class="container" id="top">
+            <div class="row" id="logo-row">
+                <div id="logo-branding" class="">
+                    <a href="#" id="header-branding">
+                        <h1>Fratire Blog - Stories of my life as I remember them       </h1> </a>
                 </div>
-
-            <h2>Featured Stories</h2>
-            <p>Each story in this collection represents a different chapter in my journey. Some are funny, some are cringe-worthy, and some might make you think differently about the world around you. But they're all authentic, and they all contain valuable lessons for anyone willing to listen.</p>
-
-            <div class="quote">
-                "The best stories come from the worst mistakes. Every failure is just a lesson in disguise, and every awkward moment is a stepping stone to becoming the person you're meant to be."
+                <div id="email-signup" class="  hidden-sm hidden-xs">
+                    <!-- Begin MailChimp Signup Form -->
+                   
+                    <div id="mc_embed_signup_nojs">
+                        <form
+                            action="https://22822518.sibforms.com/serve/MUIEAAiEfZA4W4ABC5HOxk2yQms-8jRZte_jfGq4IawIt6ZAa8wyCx6h6OuZxFKrZHomAUfmMMeIcUj49XLQyQMZHAn2ONjcyAuRywDr67M_d17gkUwGtrtvzoWRt9VYxL9fPowsmggLalxXSz_aM3LpExvO66absCmvE3T1kGkgYZsxFtOB0j0Kpd6wLfWgwadNDqzDqyPxS61w"
+                            method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
+                            class="validate" target="_blank" novalidate>
+                            <label for="mce-EMAIL"></label>
+                            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL"
+                                placeholder="Enter email address" required />
+                            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" />
+                        </form>
                     </div>
-
-            <h2>Why I Write These Stories</h2>
-            <p>I write these stories not to glorify or romanticize the experiences, but to provide a realistic look at what it's like to navigate the modern dating world. Too many people only share their successes, creating unrealistic expectations and leaving others feeling like they're the only ones struggling.</p>
-
-            <p>These blog posts are my way of saying: "You're not alone. We've all been there. And here's what I learned from it."</p>
-
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <span class="stat-number">15+</span>
-                    <span class="stat-label">Stories</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">3</span>
-                    <span class="stat-label">Years</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">10K+</span>
-                    <span class="stat-label">Readers</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">100%</span>
-                    <span class="stat-label">Real</span>
+                    <!--End mc_embed_signup-->
                 </div>
             </div>
-
-            <h2>What Readers Say</h2>
-            <p>"Finally, someone who tells it like it is. No sugar-coating, no fake success stories – just real experiences and honest lessons."</p>
-            <p>"These stories made me realize I'm not the only one who's made these mistakes. Thank you for being so open and honest."</p>
-            <p>"The best dating advice I've ever read. Real stories from real experiences, not some theoretical BS."</p>
-
-            <div class="cta-section">
-                <h3 class="cta-title">Ready to Dive In?</h3>
-                <p class="cta-text">Explore the stories below and discover what it really means to navigate the modern dating world.</p>
-                <a href="#stories" class="cta-button">Read the Stories</a>
+            <div class="row" id="top-nav">
+                <div id="slogan" class="col-md-2 hidden-sm hidden-xs">In Data We Trust</div>
+                <div id="top-links" class="col-md-8">
+                    <div class="menu-header-menu-container">
+                        <ul>
+                            <li id="item-id"><?php __( "Menu:", "textdomain" ); ?></li>
+                            <li id="menu-item-8556"
+                                class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-8556"><a
+                                    href="http://jackbase.me/en/blog/fratire-blog.html">Blog</a></li>
+                            <li id="menu-item-8557" c
+                                class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-8557"><a
+                                    href="../../home.html">My Page</a></li>
+                            <li id="menu-item-8558"
+                                class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-8558"><a
+                                    href="../../contact.html">Contact me</a>
+                            </li>
+                            <li id="menu-item-8560"
+                                class="menu-item menu-item-type-post_type menu-item-object-post menu-item-8560"><a
+                                    href="../../bio.html">About me</a></li>
+                            <li id="menu-item-8559"
+                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8559"><a
+                                    href="../../work.html">My work</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-2 hidden-sm hidden-xs" id="social-links">
+                    <a href="https://facebook.com/jakabasej" target="_blank"><img
+                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyAQAAAAA2RLUcAAAAAnRSTlMAAHaTzTgAAAAOSURBVBjTY2AYBYMJAAABkAABxZvbSQAAAABJRU5ErkJggg=="
+                            alt="Follow Priceonomics on Facebook"
+                            data-src="https://etzq49yfnmd.exactdn.com/wp-content/themes/priceonomics/images/facebook.png?strip=all&amp;lossy=1&amp;ssl=1"
+                            decoding="async" class="lazyload" width="50" height="50" /><noscript><img
+                                src="https://etzq49yfnmd.exactdn.com/wp-content/themes/priceonomics/images/facebook.png?strip=all&amp;lossy=1&amp;ssl=1"
+                                alt="Follow Priceonomics on Facebook" data-eio="l" /></noscript></a>
+                    <a href="https://twitter.com/jakabasej" target="_blank"><img
+                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyAQAAAAA2RLUcAAAAAnRSTlMAAHaTzTgAAAAOSURBVBjTY2AYBYMJAAABkAABxZvbSQAAAABJRU5ErkJggg=="
+                            alt="Follow Priceonomics on Twitter"
+                            data-src="https://etzq49yfnmd.exactdn.com/wp-content/themes/priceonomics/images/twitter.png?strip=all&amp;lossy=1&amp;ssl=1"
+                            decoding="async" class="lazyload" width="50" height="50" /><noscript><img
+                                src="https://etzq49yfnmd.exactdn.com/wp-content/themes/priceonomics/images/twitter.png?strip=all&amp;lossy=1&amp;ssl=1"
+                                alt="Follow Priceonomics on Twitter" data-eio="l" /></noscript></a>
+                    <a id="rss-link" href="https://instagram.com/jakabasej" target="_blank"><img id="rss-icon"
+                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyAQAAAAA2RLUcAAAAAnRSTlMAAHaTzTgAAAAOSURBVBjTY2AYBYMJAAABkAABxZvbSQAAAABJRU5ErkJggg=="
+                            alt="RSS feed"
+                            data-src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHoAAAB6CAMAAABHh7fWAAAAY1BMVEX///8AAABCQkLX19e6urpqamrU1NQ/Pz80NDQeHh7n5+e9vb34+PhgYGBSUlLExMSkpKR2dnZISEixsbHKyspNTU2AgICHh4dlZWVaWlrw8PDf398UFBSTk5MODg4kJCScnJx7WzXrAAAEXUlEQVRogdVb6ZqiMBCE4UZUEG/U8f2fcod1gOocmGCy/W39miGakqRT3el0gkCLKK6bQ16EC1Hkh6aOI33/GpTteTGn8AvObWlBvE8c8f6yJ3tD4u3BJe8Lh60BcbpxT9xjk74hro5+iHscqznm6OGPOQwfM+Ze+yTuUeuYT76Zw/CkZm78M4dhY8xc5Hn2tQhZrhZCBbditM9taiNEEsq0Pcu9SmMuWdgm/oR1QiwJlGBrkdC8tpd9LaK10Dnpu6Lr+XvljrjH6pt0/0BtoRp2ubplDoLrhRAcp5ZU1+AO9OUmPSceQ7PqPwVZQZvh6db7O/cg7z34UDT/iy/mIMD5Prwe7dG2XVrYvr4/40mUrmjnr7glgScOV9U2/9vj4zi+zQqIkv5BCVK7dsd8HzvNRwmBIS/60Wjht7jTMBTmfBh01Mz2539Q+M1cZ1bo0JwnbwUGff75F8bbkccIJA/c/T6OYcTpIDhjrnJK3Q4NZHLhh5ydUXc3Sj3qFMxujPbQzvVmBdEHJ0MD2HSNs/IuSEdU126/atvVvrsqwuuSesnwPjSAo2rA6ArjaCh6JtnUR5Y8pUW5o9SjUoGIHILJIHIz3u4kTGSP26kjH3rS1kmeka6Avw2wykINMhRhauIQjU3PCzD37D3xVlg0FDlsJ9HQMP6FXw7UX++IS3Q0SiSTuaSjpZFt3tci6pVijkXcplG/3rOfYPP7Qrf1i6gNd2QQX1VdGomrZgF1JQbTWqxnt9H21JXWsGVkc9zW1DbM89zW1IrR3jX3um3re7OT22aCHVtqycI2dTm+WVXWUuZHH8tbUsdCx2vJz6TisGjDSzvqkq7nXJkCE3TupnNFdtRUw5QZiR40Jko0n7KiJtuiuXCiJR/UpAetqMlIzgaOxCY0ftCGGrcM70Io8t5qS7OhRjHRzvMAnG+1D7agxljeIJbA2elUH7CgRjUxSCyjTSp1xYIa8jtGe0HQlsdn1BjnGMXKmJZRbR7NqSGyNNwLgp4/P6IGJdMmlClgN6NSNGNq9NOGG4Ry+obKbxtTX6fW3WzcA78W/LciMWNMDav6rZwMAFlRrGxjakgu3eVWNaYkSqg43jKmBgE3tDJiZwoZN6YGf2C8+Z7/zv9AzTjgjGbGuLgYJYVRSBndB6fTZAwVGAMkzrCQMRhm3AJwbnwYt3ucm1zGrT1nQoMxjcOZvOJM2XEmKhnTs5xJ6WBJKt4Zte0BhEtqu2MXK2qnh0064GGTnyM2LfCIbcHBoqIA8XFSxiRz1Lmn41QdyHGql0NkLcghspejcy3I0bmXggEtSMGAlzIJLYAs8lQcogEtDvFTEqMBxBT97PopBFJCLATyVP6kAjjel4h4KvqSIRV9+St1E6AodWMs8OMsa2Qs5uQsYWUs3OUsV5YKxC4ui7QvQudC31Jp+uFflaZzFuRzXkPgvHzBeeWE86IN5/UizktVAeNVsh5sF+h6sF0b7MF2WfIF31dE/wAKokKo3KXTuAAAAABJRU5ErkJggg=="
+                            decoding="async" class="lazyload" width="50" height="50"><noscript><img id="rss-icon"
+                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHoAAAB6CAMAAABHh7fWAAAAY1BMVEX///8AAABCQkLX19e6urpqamrU1NQ/Pz80NDQeHh7n5+e9vb34+PhgYGBSUlLExMSkpKR2dnZISEixsbHKyspNTU2AgICHh4dlZWVaWlrw8PDf398UFBSTk5MODg4kJCScnJx7WzXrAAAEXUlEQVRogdVb6ZqiMBCE4UZUEG/U8f2fcod1gOocmGCy/W39miGakqRT3el0gkCLKK6bQ16EC1Hkh6aOI33/GpTteTGn8AvObWlBvE8c8f6yJ3tD4u3BJe8Lh60BcbpxT9xjk74hro5+iHscqznm6OGPOQwfM+Ze+yTuUeuYT76Zw/CkZm78M4dhY8xc5Hn2tQhZrhZCBbditM9taiNEEsq0Pcu9SmMuWdgm/oR1QiwJlGBrkdC8tpd9LaK10Dnpu6Lr+XvljrjH6pt0/0BtoRp2ubplDoLrhRAcp5ZU1+AO9OUmPSceQ7PqPwVZQZvh6db7O/cg7z34UDT/iy/mIMD5Prwe7dG2XVrYvr4/40mUrmjnr7glgScOV9U2/9vj4zi+zQqIkv5BCVK7dsd8HzvNRwmBIS/60Wjht7jTMBTmfBh01Mz2539Q+M1cZ1bo0JwnbwUGff75F8bbkccIJA/c/T6OYcTpIDhjrnJK3Q4NZHLhh5ydUXc3Sj3qFMxujPbQzvVmBdEHJ0MD2HSNs/IuSEdU126/atvVvrsqwuuSesnwPjSAo2rA6ArjaCh6JtnUR5Y8pUW5o9SjUoGIHILJIHIz3u4kTGSP26kjH3rS1kmeka6Avw2wykINMhRhauIQjU3PCzD37D3xVlg0FDlsJ9HQMP6FXw7UX++IS3Q0SiSTuaSjpZFt3tci6pVijkXcplG/3rOfYPP7Qrf1i6gNd2QQX1VdGomrZgF1JQbTWqxnt9H21JXWsGVkc9zW1DbM89zW1IrR3jX3um3re7OT22aCHVtqycI2dTm+WVXWUuZHH8tbUsdCx2vJz6TisGjDSzvqkq7nXJkCE3TupnNFdtRUw5QZiR40Jko0n7KiJtuiuXCiJR/UpAetqMlIzgaOxCY0ftCGGrcM70Io8t5qS7OhRjHRzvMAnG+1D7agxljeIJbA2elUH7CgRjUxSCyjTSp1xYIa8jtGe0HQlsdn1BjnGMXKmJZRbR7NqSGyNNwLgp4/P6IGJdMmlClgN6NSNGNq9NOGG4Ry+obKbxtTX6fW3WzcA78W/LciMWNMDav6rZwMAFlRrGxjakgu3eVWNaYkSqg43jKmBgE3tDJiZwoZN6YGf2C8+Z7/zv9AzTjgjGbGuLgYJYVRSBndB6fTZAwVGAMkzrCQMRhm3AJwbnwYt3ucm1zGrT1nQoMxjcOZvOJM2XEmKhnTs5xJ6WBJKt4Zte0BhEtqu2MXK2qnh0064GGTnyM2LfCIbcHBoqIA8XFSxiRz1Lmn41QdyHGql0NkLcghspejcy3I0bmXggEtSMGAlzIJLYAs8lQcogEtDvFTEqMBxBT97PopBFJCLATyVP6kAjjel4h4KvqSIRV9+St1E6AodWMs8OMsa2Qs5uQsYWUs3OUsV5YKxC4ui7QvQudC31Jp+uFflaZzFuRzXkPgvHzBeeWE86IN5/UizktVAeNVsh5sF+h6sF0b7MF2WfIF31dE/wAKokKo3KXTuAAAAABJRU5ErkJggg=="
+                                alt="RSS feed" data-eio="l"></noscript></a>
+                </div>
+            </div>
         </div>
-    </div>
 
-        <div id="stories" class="blog-grid">
-            <div class="blog-card">
-                <img src="images/djtable.png" alt="Sex on DJ Table" class="blog-card-image">
-                <div class="blog-card-content">
-                    <h3 class="blog-card-title">Sex on DJ Table</h3>
-                    <p class="blog-card-excerpt">A wild night that taught me more about boundaries and respect than any book ever could.</p>
-                    <a href="blogi/b1-sex-on-dj-table.html" class="blog-card-link">
-                        Read Story <span class="blog-card-arrow">→</span>
-                    </a>
-            </div>
-            </div>
 
-            <div class="blog-card">
-                <img src="images/pua1.png" alt="I Just Want to Get My Pencil Wet" class="blog-card-image">
-                <div class="blog-card-content">
-                    <h3 class="blog-card-title">I Just Want to Get My Pencil Wet</h3>
-                    <p class="blog-card-excerpt">The story of how I learned that sometimes the best approach is the most direct one.</p>
-                    <a href="blogi/Ijustwanttogetmypencilwet1.html" class="blog-card-link">
-                        Read Story <span class="blog-card-arrow">→</span>
-                    </a>
-        </div>
-    </div>
+        <div class="container" id="front-page">
+            <div>
+                <aside id="block-7" class="widget widget_block">
+                    <div class="row">
+                        <img style="border-bottom:1px solid #bbb;border-left:1px solid #bbb;border-right:1px solid #bbb;"
+                            
+                            alt="priceonomics logo"
+                            src="images/collage.png"
+                            decoding="async" class="lazyload" width="1194" height="300"><noscript><img
+                                style="border-bottom:1px solid #bbb;border-left:1px solid #bbb;border-right:1px solid #bbb;"
+                                src="images/collage.png"
+                                alt="priceonomics logo" data-eio="l"></noscript>
+                    </div>
+                </aside>
+            </div>
+            <div id="row">
+                <p class="subtitle"> This forum is not for girls who like me, really not. Here are the stories on the other side of romantic novels such as Hot Ticket, Backstage pass...</p>
+                <p class="subtitle"> How to become a guy that girls can't resist.</p>
+                <p class="subtitle">  This is not for me but for young guy that send me emails thanking me </p>
 
-            <div class="blog-card">
-                <img src="images/collage.png" alt="Speed Seduction" class="blog-card-image">
-                <div class="blog-card-content">
-                    <h3 class="blog-card-title">Speed Seduction</h3>
-                    <p class="blog-card-excerpt">Learning the art of quick connections and what really matters in those first few minutes.</p>
-                    <a href="blogi/n12speedSeduction.html" class="blog-card-link">
-                        Read Story <span class="blog-card-arrow">→</span>
-                    </a>
-            </div>
-            </div>
+                <p class="subtitle"> If you want to pass, google what means RSD in pickup related sphere like 'RealnaSocialnaDinamika' Write it down, dont paste it</p>
 
-            <div class="blog-card">
-                <img src="images/collage.png" alt="Bowling" class="blog-card-image">
-                <div class="blog-card-content">
-                    <h3 class="blog-card-title">Bowling</h3>
-                    <p class="blog-card-excerpt">Sometimes the best dates happen in the most unexpected places, like a bowling alley.</p>
-                    <a href="blogi/n13bowling.html" class="blog-card-link">
-                        Read Story <span class="blog-card-arrow">→</span>
-                    </a>
-            </div>
-            </div>
+            <input class="draft" id="input1" type="text" />
+            <button class="send" id="sendbutton" onclick="myFunction1()" disabled>Send</button>
+            <p id="demo"></p>
+                </div>
+            <script>
+                var input1 = document.getElementById('input1'),
+                    sendbutton = document.getElementById('sendbutton'),
+                    block = document.getElementById('container2'),
+                    blog = document.getElementById('row');
 
-            <div class="blog-card">
-                <img src="images/collage.png" alt="Morocco Girl" class="blog-card-image">
-                <div class="blog-card-content">
-                    <h3 class="blog-card-title">Morocco Girl</h3>
-                    <p class="blog-card-excerpt">A travel romance that taught me about cultural differences and the power of genuine connection.</p>
-                    <a href="blogi/n15MorrocoGirl.html" class="blog-card-link">
-                        Read Story <span class="blog-card-arrow">→</span>
-                    </a>
-            </div>
-            </div>
+                function IsEmpty() {
+                    if (input1.value == 'RealSocialDynamics') {
+                        sendbutton.removeAttribute('disabled');
+                    } else {
+                        sendbutton.addAttribute('disabled', '');
+                    }
+                }
 
-            <div class="blog-card">
-                <img src="images/collage.png" alt="Inspector" class="blog-card-image">
-                <div class="blog-card-content">
-                    <h3 class="blog-card-title">Inspector</h3>
-                    <p class="blog-card-excerpt">The story of how I learned to trust my instincts and not let others' opinions cloud my judgment.</p>
-                    <a href="blogi/n16inspektor.html" class="blog-card-link">
-                        Read Story <span class="blog-card-arrow">→</span>
-                    </a>
-            </div>
-            </div>
+                function myFunction1() {
+                    document.getElementById("demo").innerHTML = "Hello World";
+                    
+                    document.getElementById("row").style.display = "none";
+                    document.getElementById("container2").style.display = "block";
 
-            <div class="blog-card">
-                <img src="images/collage.png" alt="Yolo Trolo" class="blog-card-image">
-                <div class="blog-card-content">
-                    <h3 class="blog-card-title">Yolo Trolo</h3>
-                    <p class="blog-card-excerpt">Living life to the fullest and learning that sometimes you have to take risks to get what you want.</p>
-                    <a href="blogi/n2yolotrolo.html" class="blog-card-link">
-                        Read Story <span class="blog-card-arrow">→</span>
-                    </a>
-            </div>
-            </div>
 
-            <div class="blog-card">
-                <img src="images/collage.png" alt="Rozna Take Down" class="blog-card-image">
-                <div class="blog-card-content">
-                    <h3 class="blog-card-title">Rozna Take Down</h3>
-                    <p class="blog-card-excerpt">The art of the take down and how to handle rejection with grace and dignity.</p>
-                    <a href="blogi/n3roznatakedown.html" class="blog-card-link">
-                        Read Story <span class="blog-card-arrow">→</span>
-                    </a>
-            </div>
-            </div>
+                   
+                    
+                }
 
-            <div class="blog-card">
-                <img src="images/collage.png" alt="K Bilahtoucil" class="blog-card-image">
-                <div class="blog-card-content">
-                    <h3 class="blog-card-title">K Bilahtoucil</h3>
-                    <p class="blog-card-excerpt">A story about persistence, patience, and learning when to walk away.</p>
-                    <a href="blogi/n4kBilahtoucil.html" class="blog-card-link">
-                        Read Story <span class="blog-card-arrow">→</span>
-                    </a>
-            </div>
-            </div>
+                input1.onkeyup = IsEmpty;
+            </script>
 
-            <div class="blog-card">
-                <img src="images/collage.png" alt="Snipe Shot Game" class="blog-card-image">
-                <div class="blog-card-content">
-                    <h3 class="blog-card-title">Snipe Shot Game</h3>
-                    <p class="blog-card-excerpt">Learning the importance of timing and precision in both games and relationships.</p>
-                    <a href="blogi/n5snipeShotGame.html" class="blog-card-link">
-                        Read Story <span class="blog-card-arrow">→</span>
-                    </a>
-            </div>
-            </div>
+<div id="container2" style="display: none">
+                <section class="col-md-9 main-content" id="blog-post-list">
+                    <div class="corset">
+                        <h1>NEW Storie</h1>
+                        <div id="featured-post">
+                            <h2><a href="blogi/b1-sex-on-dj-table.html"
+                                    class="blog-link">Sex under the DJ table</a></h2>
+                            <div class="row">
+                                <a href="blogi/b1-sex-on-dj-table.html"
+                                    class="blog-image">
+                                    <img width="640" height="466"
+                                        src="images/djtable.png"
+                                        > </a>
+                            </div>
+                            <div class="row blog-summary">
+                                <div class="col-md-12 blog-preview">
+                                    <p class="date-line"><span class="author">By <a class="author-link author-link-top"
+                                                href="#" title="Rohin Dhar">Jaka Basej</a></span>
+                                    </p>
+                                    <p class="subtitle">  Pol me zadane, kaj če bi jaz fuku z eno pod DJ mizo, tega še nism naredu, sounds fun. Taprvo je preveč strah. Izmenjava si napačne cifre in pobegne na vip.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <ul id="posts-main">
 
-            <div class="blog-card">
-                <img src="images/collage.png" alt="My First Story" class="blog-card-image">
-                <div class="blog-card-content">
-                    <h3 class="blog-card-title">My First Story</h3>
-                    <p class="blog-card-excerpt">The beginning of it all – my first real experience that started this whole journey.</p>
-                    <a href="blogi/n6myFirstStory.html" class="blog-card-link">
-                        Read Story <span class="blog-card-arrow">→</span>
-                    </a>
+                            <!--//////////////////////////////////////////////////////////////// tet -->
+
+
+                            
+
+                            <li id="post1" class="clearfix mb5">
+                                <div class="row blog-summary">
+                                    <div class="row">
+                                        <div class="preview-img-container col-xs-3">
+                                            <a href="blogi/Ijustwanttogetmypencilwet1.html"
+                                                class="blog-image">
+                                                <img width="1200" height="675"
+                                                    src="images/pua1.png"
+                                                    class="attachment-post-thumbnail size-post-thumbnail wp-post-image lazyload"
+                                                    alt="" loading="lazy"
+                                                  data-sizes="auto" />
+                                        </div>
+                                        <div class="col-xs-9 blog-preview">
+                                            <h2><a href="blogi/Ijustwanttogetmypencilwet1.html"
+                                                    class="blog-link">
+                                                    I just want to get my pencil wet #1
+                                                     </a></h2>
+                                        </div>
+                                        <div class="col-xs-9 blog-preview">
+                                            <p class="date-line"><span class="author">By
+
+                                                    <a class="author-link author-link-top" href="#"
+                                                        title="Team Recurrency">JackBase</a>
+                                                </span></p>
+                                        </div>
+                                        <div class="clearfix visible-xs"></div>
+                                        <div class="col-xs-12 col-sm-9 blog-preview">
+                                            <p class="subtitle"> Ona zacne recitirat ursko.
+...
+                                                Počakam da konca.
+                                                ...
+                                                Odgovorim “jaz sm zgubil erekcijo”...
+                                                Njeni prijateljici “pomisli da ti to recitira med sexom”
+                                                ...
+                                                Umreta od smeha...</p>
+                                        </div>
                                     </div>
                                 </div>
+                            </li>
+<!--//////////////////////////////////////////////////////////////// tet -->
 
-            <div class="blog-card">
-                <img src="images/collage.png" alt="Selsempokruh" class="blog-card-image">
-                <div class="blog-card-content">
-                    <h3 class="blog-card-title">Selsempokruh</h3>
-                    <p class="blog-card-excerpt">Breaking out of your comfort zone and discovering what you're really capable of.</p>
-                    <a href="blogi/n7Selsempokruh.html" class="blog-card-link">
-                        Read Story <span class="blog-card-arrow">→</span>
-                    </a>
+                            <li id="post2" class="clearfix mb5">
+                                <div class="row blog-summary">
+                                    <div class="row">
+                                        <div class="preview-img-container col-xs-3">
+                                            <a href="http://jackbase.me/en/blog/fratire-blog/blogi/1-sex-on-dj-table.html"
+                                                class="blog-image">
+                                                <img width="1200" height="675"
+                                                    src="images/djtable.png"
+                                                    class="attachment-post-thumbnail size-post-thumbnail wp-post-image lazyload"
+                                                    alt="" loading="lazy"
+                                                  data-sizes="auto" />
+                                        </div>
+                                        <div class="col-xs-9 blog-preview">
+                                            <h2><a href="http://jackbase.me/en/blog/fratire-blog/blogi/1-sex-on-dj-table.html"
+                                                    class="blog-link">
+                                                    Sex under the DJ table
+                                                     </a></h2>
+                                        </div>
+                                        <div class="col-xs-9 blog-preview">
+                                            <p class="date-line"><span class="author">By
+
+                                                    <a class="author-link author-link-top" href="#"
+                                                        title="Team Recurrency">JackBase</a>
+                                                </span></p>
+                                        </div>
+                                        <div class="clearfix visible-xs"></div>
+                                        <div class="col-xs-12 col-sm-9 blog-preview">
+                                            <p class="subtitle">  Pol me zadane, kaj če bi jaz fuku z eno pod DJ mizo, tega še nism naredu, sounds fun. Taprvo je preveč strah. Izmenjava si napačne cifre in pobegne na vip.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            
+                            <!--//////////////////////////////////////////////////////////////// tet -->
+
+
+                             <li id="post2" class="clearfix mb5">
+                                <div class="row blog-summary">
+                                    <div class="row">
+                                        <div class="preview-img-container col-xs-3">
+                                            <a href="blogi/n3roznatakedown.html"
+                                                class="blog-image">
+                                                <img width="1200" height="675"
+                                                    src="images/djtable.png"
+                                                    class="attachment-post-thumbnail size-post-thumbnail wp-post-image lazyload"
+                                                    alt="" loading="lazy"
+                                                  data-sizes="auto" />
+                                        </div>
+                                        <div class="col-xs-9 blog-preview">
+                                            <h2><a href="blogi/n3roznatakedown.html"
+                                                    class="blog-link">
+                                                     Rožna Take down </a></h2>
+                                        </div>
+                                        <div class="col-xs-9 blog-preview">
+                                            <p class="date-line"><span class="author">By
+
+                                                    <a class="author-link author-link-top" href="#"
+                                                        title="Team Recurrency">JackBase</a>
+                                                </span></p>
+                                        </div>
+                                        <div class="clearfix visible-xs"></div>
+                                        <div class="col-xs-12 col-sm-9 blog-preview">
+                                            <p class="subtitle">  
+                                                5. Punci k gre mem... Dej naredi krog. ... O my god, I love how your ass shakes.
+                                                <br> 6. Omg kak lepa rit in te yoške. Llll olmlll kak so lepe. I llllove that black tities
+                                                .</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+<!--//////////////////////////////////////////////////////////////// tet -->
+
+                            <li id="post3" class="clearfix mb5">
+                                <div class="row blog-summary">
+                                    <div class="row">
+                                        <div class="preview-img-container col-xs-3">
+                                            <a href="blogi/n2yolotrolo.html"
+                                                class="blog-image">
+                                                <img width="1200" height="675"
+                                                    src="images/djtable.png"
+                                                    class="attachment-post-thumbnail size-post-thumbnail wp-post-image lazyload"
+                                                    alt="" loading="lazy"
+                                                  data-sizes="auto" />
+                                        </div>
+                                        <div class="col-xs-9 blog-preview">
+                                            <h2><a href="blogi/n2yolotrolo.html"
+                                                    class="blog-link">
+                                                    Yolo Trolo
+                                                     </a></h2>
+                                        </div>
+                                        <div class="col-xs-9 blog-preview">
+                                            <p class="date-line"><span class="author">By
+
+                                                    <a class="author-link author-link-top" href="#"
+                                                        title="Team Recurrency">JackBase</a>
+                                                </span></p>
+                                        </div>
+                                        <div class="clearfix visible-xs"></div>
+                                        <div class="col-xs-12 col-sm-9 blog-preview">
+                                            <p class="subtitle">  Nč posebnega Le idiot sm bil celo noč</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <!--//////////////////////////////////////////////////////////////// tet -->
+
+                            <li id="post3" class="clearfix mb5">
+                                <div class="row blog-summary">
+                                    <div class="row">
+                                        <div class="preview-img-container col-xs-3">
+                                            <a href="blogi/n12speedSeduction.html"
+                                                class="blog-image">
+                                                <img width="1200" height="675"
+                                                    src="images/djtable.png"
+                                                    class="attachment-post-thumbnail size-post-thumbnail wp-post-image lazyload"
+                                                    alt="" loading="lazy"
+                                                  data-sizes="auto" />
+                                        </div>
+                                        <div class="col-xs-9 blog-preview">
+                                            <h2><a href="blogi/n12speedSeduction.html"
+                                                    class="blog-link">
+                                                    Dan ko sm ugotovil, da lahko postanem Tucker Max
+                                                     </a></h2>
+                                        </div>
+                                        <div class="col-xs-9 blog-preview">
+                                            <p class="date-line"><span class="author">By
+
+                                                    <a class="author-link author-link-top" href="#"
+                                                        title="Team Recurrency">JackBase</a>
+                                                </span></p>
+                                        </div>
+                                        <div class="clearfix visible-xs"></div>
+                                        <div class="col-xs-12 col-sm-9 blog-preview">
+                                            <p class="subtitle">  01:24 Stopim zraven, spusti glavo, se poljubiva
+                                                <br> 01:24 "Let's dance!"
+                                              01:25 Jo zavrtim.
+                                                <br> 01:25 "Let's go for a walk."
+                                                01:26 Hodiva do kleti Maximarketa
+                                                </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+<!--//////////////////////////////////////////////////////////////// tet -->
+
+                            <li id="post2" class="clearfix mb5">
+                                <div class="row blog-summary">
+                                    <div class="row">
+                                        <div class="preview-img-container col-xs-3">
+                                            <a href="blogi/n4kBilahtoucil.html"
+                                                class="blog-image">
+                                                <img width="1200" height="675"
+                                                    src="images/djtable.png"
+                                                    class="attachment-post-thumbnail size-post-thumbnail wp-post-image lazyload"
+                                                    alt="" loading="lazy"
+                                                  data-sizes="auto" />
+                                        </div>
+                                        <div class="col-xs-9 blog-preview">
+                                            <h2><a href="blogi/n4kBilahtoucil.html"
+                                                    class="blog-link">
+                                                    Dan k sm ugotovil, da so mi ljudje fouš, da bi to lah učil.
+                                                     </a></h2>
+                                        </div>
+                                        <div class="col-xs-9 blog-preview">
+                                            <p class="date-line"><span class="author">By
+
+                                                    <a class="author-link author-link-top" href="#"
+                                                        title="Team Recurrency">JackBase</a>
+                                                </span></p>
+                                        </div>
+                                        <div class="clearfix visible-xs"></div>
+                                        <div class="col-xs-12 col-sm-9 blog-preview">
+                                            <p class="subtitle"> 
+                                                 mas fanta,,,, uživaš v zvezi?
+  
+    <br> Iskreno, zakaj je to uvira.
+ 
+    <br> Povej kak maš rada svoj kurac_
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+<!--//////////////////////////////////////////////////////////////// tet -->
+
+                            <li id="post2" class="clearfix mb5">
+                                <div class="row blog-summary">
+                                    <div class="row">
+                                        <div class="preview-img-container col-xs-3">
+                                            <a href="blogi/n5snipeShotGame.html"
+                                                class="blog-image">
+                                                <img width="1200" height="675"
+                                                    src="images/djtable.png"
+                                                    class="attachment-post-thumbnail size-post-thumbnail wp-post-image lazyload"
+                                                    alt="" loading="lazy"
+                                                  data-sizes="auto" />
+                                        </div>
+                                        <div class="col-xs-9 blog-preview">
+                                            <h2><a href="blogi/n5snipeShotGame.html"
+                                                    class="blog-link">
+                                                   Snipe Shot Game
+                                                     </a></h2>
+                                        </div>
+                                        <div class="col-xs-9 blog-preview">
+                                            <p class="date-line"><span class="author">By
+
+                                                    <a class="author-link author-link-top" href="#"
+                                                        title="Team Recurrency">JackBase</a>
+                                                </span></p>
+                                        </div>
+                                        <div class="clearfix visible-xs"></div>
+                                        <div class="col-xs-12 col-sm-9 blog-preview">
+                                            <p class="subtitle">  
+                                                - 5 let nazaj, si nisem upal probat narest punci otroka, ljudje temu pravijo vulnerability
+                                <br> - 3 leta nazaj bi me blo sram, vse kar si želim je da punca zanosi, morm bit res slab fant
+                                <br> - ok sm fant in živim da punca zanosi, big deal, sue me.
+
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+<!--//////////////////////////////////////////////////////////////// tet -->
+
+<li id="post2" class="clearfix mb5">
+    <div class="row blog-summary">
+        <div class="row">
+            <div class="preview-img-container col-xs-3">
+                <a href="blogi/n7Selsempokruh.html"
+                    class="blog-image">
+                    <img width="1200" height="675"
+                        src="images/djtable.png"
+                        class="attachment-post-thumbnail size-post-thumbnail wp-post-image lazyload"
+                        alt="" loading="lazy"
+                      data-sizes="auto" />
+            </div>
+            <div class="col-xs-9 blog-preview">
+                <h2><a href="blogi/n7Selsempokruh.html"
+                        class="blog-link">
+                        Po sexu sem šel kupit kruh
+                         </a></h2>
+            </div>
+            <div class="col-xs-9 blog-preview">
+                <p class="date-line"><span class="author">By
+
+                        <a class="author-link author-link-top" href="#"
+                            title="Team Recurrency">JackBase</a>
+                    </span></p>
+            </div>
+            <div class="clearfix visible-xs"></div>
+            <div class="col-xs-12 col-sm-9 blog-preview">
+                <p class="subtitle">     Ob 20.00 jo pospremim na bus.
+                    <br> Tam me praša zakaj želim imet 3 dekleta hkrati.
+                    <br> Vprašam kdaj je prebrala to. Odgovori “takoj”</p>
+            </div>
+        </div>
+    </div>
+
+</li>
+
+<!--//////////////////////////////////////////////////////////////// tet -->
+
+<li id="post2" class="clearfix mb5">
+    <div class="row blog-summary">
+        <div class="row">
+            <div class="preview-img-container col-xs-3">
+                <a href="blogi/n9Joker.html"
+                    class="blog-image">
+                    <img width="1200" height="675"
+                        src="images/djtable.png"
+                        class="attachment-post-thumbnail size-post-thumbnail wp-post-image lazyload"
+                        alt="" loading="lazy"
+                      data-sizes="auto" />
+            </div>
+            <div class="col-xs-9 blog-preview">
+                <h2><a href="blogi/n9Joker.html"
+                        class="blog-link">
+                        Slavni Joker #storie
+                         </a></h2>
+            </div>
+            <div class="col-xs-9 blog-preview">
+                <p class="date-line"><span class="author">By
+
+                        <a class="author-link author-link-top" href="#"
+                            title="Team Recurrency">JackBase</a>
+                    </span></p>
+            </div>
+            <div class="clearfix visible-xs"></div>
+            <div class="col-xs-12 col-sm-9 blog-preview">
+                <p class="subtitle">      Na klopci pred izhodom sedi ena deklica sama... Hej ti si pa ena dobra maškura danes; ja princesa; zakon, blalalalalal blalalalaa. Kok kul ej jaz ful upam da se ta od mojega data ne prikaže. Pogosto hodiš v cirkus? Ne ponavadi hodimo ven s prijateljicami v parlija. Zadnjič sem bla 3 leta nazaj. A si na vipu? Ne; Jaz mam še eno uspopnico fraj, pridi greva.</p>
+            </div>
+        </div>
+    </div>
+
+</li>
+<!--//////////////////////////////////////////////////////////////// tet -->
+
+<li id="post2" class="clearfix mb5">
+    <div class="row blog-summary">
+        <div class="row">
+            <div class="preview-img-container col-xs-3">
+                <a href="blogi/n8Zlatokrilo.html"
+                    class="blog-image">
+                    <img width="1200" height="675"
+                        src="images/djtable.png"
+                        class="attachment-post-thumbnail size-post-thumbnail wp-post-image lazyload"
+                        alt="" loading="lazy"
+                      data-sizes="auto" />
+            </div>
+            <div class="col-xs-9 blog-preview">
+                <h2><a href="blogi/n8Zlatokrilo.html"
+                        class="blog-link">
+                       Zlato krilo
+                         </a></h2>
+            </div>
+            <div class="col-xs-9 blog-preview">
+                <p class="date-line"><span class="author">By
+
+                        <a class="author-link author-link-top" href="#"
+                            title="Team Recurrency">JackBase</a>
+                    </span></p>
+            </div>
+            <div class="clearfix visible-xs"></div>
+            <div class="col-xs-12 col-sm-9 blog-preview">
+                <p class="subtitle">    Sram me je do postam to zgodbo, a gor je vse. Zaradi tega sem zgubil punco.
+                </p>
+            </div>
+        </div>
+    </div>
+</li>
+<!--//////////////////////////////////////////////////////////////// tet -->
+
+<li id="post2" class="clearfix mb5">
+    <div class="row blog-summary">
+        <div class="row">
+            <div class="preview-img-container col-xs-3">
+                <a href="blogi/n8Mladikralj.html"
+                    class="blog-image">
+                    <img width="1200" height="675"
+                        src="images/djtable.png"
+                        class="attachment-post-thumbnail size-post-thumbnail wp-post-image lazyload"
+                        alt="" loading="lazy"
+                      data-sizes="auto" />
+            </div>
+            <div class="col-xs-9 blog-preview">
+                <h2><a href="blogi/n8Mladikralj.html"
+                        class="blog-link">
+                        Mladenič misli da je kralj
+                         </a></h2>
+            </div>
+            <div class="col-xs-9 blog-preview">
+                <p class="date-line"><span class="author">By
+
+                        <a class="author-link author-link-top" href="#"
+                            title="Team Recurrency">JackBase</a>
+                    </span></p>
+            </div>
+            <div class="clearfix visible-xs"></div>
+            <div class="col-xs-12 col-sm-9 blog-preview">
+                <p class="subtitle">     Ni prav pogosto, da dekle zaljubi mlado
+                    <br> Se v fanta, ki ima številke rajši kot čokolado
+                    <br> Čeprav bo tak fant nekoč dosegel večno slavo
+                    <br> Je za ženski svet obdarjen v ta napačno glavo</p>
+            </div>
+        </div>
+    </div>
+</li>
+
+<!--//////////////////////////////////////////////////////////////// tet -->
+
+<li id="post2" class="clearfix mb5">
+    <div class="row blog-summary">
+        <div class="row">
+            <div class="preview-img-container col-xs-3">
+                <a href="blogi/n13bowling.html"
+                    class="blog-image">
+                    <img width="1200" height="675"
+                        src="images/djtable.png"
+                        class="attachment-post-thumbnail size-post-thumbnail wp-post-image lazyload"
+                        alt="" loading="lazy"
+                      data-sizes="auto" />
+            </div>
+            <div class="col-xs-9 blog-preview">
+                <h2><a href="blogi/n13bowling.html"
+                        class="blog-link">
+                       Bowling
+                         </a></h2>
+            </div>
+            <div class="col-xs-9 blog-preview">
+                <p class="date-line"><span class="author">By
+
+                        <a class="author-link author-link-top" href="#"
+                            title="Team Recurrency">JackBase</a>
+                    </span></p>
+            </div>
+            <div class="clearfix visible-xs"></div>
+            <div class="col-xs-12 col-sm-9 blog-preview">
+                <p class="subtitle">    Med pogovorom jo je en vprašu, če bo jedla. Odgovorim mu: "ne, čez pol ure greva na date, bova tm."  Katja reče nee. Odgovorim ji: "pol pa pejt jest, da se zrediš, da mi neboš več všeč, da bom šel lah naprej. " Umre od smeha. Fant me pohvali, da mam dobr game in gre preč.</p>
+            </div>
+        </div>
+    </div>
+</li>
+<!--//////////////////////////////////////////////////////////////// tet -->
+
+<li id="post2" class="clearfix mb5">
+    <div class="row blog-summary">
+        <div class="row">
+            <div class="preview-img-container col-xs-3">
+                <a href="blogi/n16inspektor.html"
+                    class="blog-image">
+                    <img width="1200" height="675"
+                        src="images/djtable.png"
+                        class="attachment-post-thumbnail size-post-thumbnail wp-post-image lazyload"
+                        alt="" loading="lazy"
+                      data-sizes="auto" />
+            </div>
+            <div class="col-xs-9 blog-preview">
+                <h2><a href="blogi/n16inspektor.html"
+                        class="blog-link">
+                       Inšpektor
+                         </a></h2>
+            </div>
+            <div class="col-xs-9 blog-preview">
+                <p class="date-line"><span class="author">By
+
+                        <a class="author-link author-link-top" href="#"
+                            title="Team Recurrency">JackBase</a>
+                    </span></p>
+            </div>
+            <div class="clearfix visible-xs"></div>
+            <div class="col-xs-12 col-sm-9 blog-preview">
+                <p class="subtitle">   Ugotovim, da nisem prejel listov, kamor bi napisal poročilo.
+                    <br> Zato me šefica odposti.
+                    <br>
+                    <br> HEJ mate srečo, nimam listov za zapisnik, danes ni INŠEKCIJE!</p>
+            </div>
+        </div>
+    </div>
+</li>
+<!--//////////////////////////////////////////////////////////////// tet -->
+
+                            <li id="post2" class="clearfix mb5">
+                                <div class="row blog-summary">
+                                    <div class="row">
+                                        <div class="preview-img-container col-xs-3">
+                                            <a href="blogi/n6myFirstStory.html"
+                                                class="blog-image">
+                                                <img width="1200" height="675"
+                                                    src="images/djtable.png"
+                                                    class="attachment-post-thumbnail size-post-thumbnail wp-post-image lazyload"
+                                                    alt="" loading="lazy"
+                                                  data-sizes="auto" />
+                                        </div>
+                                        <div class="col-xs-9 blog-preview">
+                                            <h2><a href="blogi/n6myFirstStory.html"
+                                                    class="blog-link">
+                                                    Moja prva zgodba
+                                                     </a></h2>
+                                        </div>
+                                        <div class="col-xs-9 blog-preview">
+                                            <p class="date-line"><span class="author">By
+
+                                                    <a class="author-link author-link-top" href="#"
+                                                        title="Team Recurrency">JackBase</a>
+                                                </span></p>
+                                        </div>
+                                        <div class="clearfix visible-xs"></div>
+                                        <div class="col-xs-12 col-sm-9 blog-preview">
+                                            <p class="subtitle"> Gotcha, 2 points for me si mislim. Vzamem iz denarnice prstan in 3.B postane za 5 minut moja žena.
+
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                               <!--//////////////////////////////////////////////////////////////// tet -->
+
+                               <li id="post2" class="clearfix mb5">
+                                <div class="row blog-summary">
+                                    <div class="row">
+                                        <div class="preview-img-container col-xs-3">
+                                            <a href="blogi/n15MorrocoGirl.html"
+                                                class="blog-image">
+                                                <img width="1200" height="675"
+                                                    src="images/djtable.png"
+                                                    class="attachment-post-thumbnail size-post-thumbnail wp-post-image lazyload"
+                                                    alt="" loading="lazy"
+                                                  data-sizes="auto" />
+                                        </div>
+                                        <div class="col-xs-9 blog-preview">
+                                            <h2><a href="blogi/n15MorrocoGirl.html"
+                                                    class="blog-link">
+                                                   Morroco Girl
+                                                     </a></h2>
+                                        </div>
+                                        <div class="col-xs-9 blog-preview">
+                                            <p class="date-line"><span class="author">By
+
+                                                    <a class="author-link author-link-top" href="#"
+                                                        title="Team Recurrency">JackBase</a>
+                                                </span></p>
+                                        </div>
+                                        <div class="clearfix visible-xs"></div>
+                                        <div class="col-xs-12 col-sm-9 blog-preview">
+                                            <p class="subtitle">   You cannot hold hands that is cheating.
+                                                <br> 
+                                                <br> yeah right, ležanje na postelji z drugim pa ni
+                                                <br> poljubin na vrat zavtrim,
+                                         
+                                                <br> odnesem na svojo posteljo, dava par stvari dol....
+
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <!--//////////////////////////////////////////////////////////////// tet -->
+
+                           
+                           <!--//////////////////////////////////////////////////////////////// tet -->
+
+
+                        </ul>
+                        <div class="pagination" id="pagination">
+                            <div class="navigation">
+                                <ul>
+                                    <li class="active"><a href="">1</a></li>
+                                   ...
+                                
+                                    <li><a href="">Next Page &raquo;</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <aside id="block-6" class="widget widget_block">
+                    <div class="wp-container-3 wp-block-group">
+                        <div class="wp-block-group__inner-container">
+                            <div class="wp-container-2 wp-block-columns">
+                                <div class="wp-container-1 wp-block-column">
+                                    <div class="col-md-3 hidden-xs hidden-sm" id="right-islands">
+                                        <div class="island-label">
+                                            <h1>POPULAR</h1>
+                                        </div>
+                                        <div class="col-md-12 hidden-xs hidden-sm ">
+                                            <div class="row ">
+                                                <div class="top">
+                                                    <h3><a href="blogi/b1-sex-on-dj-table.html">
+                                                            Sex under the DJ table </a></h3>
+                                                    <p></p>
+                                                </div>
+                                                <div class="inside ">
+                                                    <p><a href="blogi/b1-sex-on-dj-table.html">
+                                                            <img width="500" height="296"
+                                                                src="images/djtable.png"
+                                                                class="attachment-post-thumbnail size-post-thumbnail wp-post-image lazyload"
+                                                                alt="" loading="lazy">
+                                                                 </a></p>
+                                                    <p><a href="blogi/b1-sex-on-dj-table.html"><br>
+                                                        Pol me zadane, kaj če bi jaz fuku z eno pod DJ mizo, tega še nism naredu, sounds fun. Taprvo je preveč strah. Izmenjava si napačne cifre in pobegne na vip. </a>
+                                                    </p>
+                                                    <p></p>
+                                                </div>
+                                            </div>
+                                            <div class="row ">
+                                                <div class="top">
+                                                    <h3><a href="blogi/b1-sex-on-dj-table.html">
+                                                        Bowling </a></h3>
+                                                    <p></p>
+                                                </div>
+                                                <div class="inside ">
+                                                    <p><a href="blogi/n13bowling.html">
+                                                            <img width="500" height="296"
+                                                                src="images/djtable.png"
+                                                                class="attachment-post-thumbnail size-post-thumbnail wp-post-image lazyload"
+                                                                alt="" loading="lazy">
+                                                                 </a></p>
+                                                    <p><a href="blogi/n13bowling.html"><br>
+                                                        Med pogovorom jo je en vprašu, če bo jedla. Odgovorim mu: "ne, čez pol ure greva na date, bova tm." Katja reče nee. Odgovorim ji: "pol pa pejt jest, da se zrediš, da mi neboš več všeč, da bom šel lah naprej. " Umre od smeha. Fant me pohvali, da mam dobr game in gre preč.</p>
+                                                    <p></p>
+                                                </div>
+                                            </div>
+                                            <div class="row ">
+                                                <div class="top">
+                                                    <h3><a href="blogi/b1-sex-on-dj-table.html">
+                                                        Po sexu sem šel kupit kruh </a></h3>
+                                                    <p></p>
+                                                </div>
+                                                <div class="inside ">
+                                                    <p><a href="blogi/b1-sex-on-dj-table.html">
+                                                            <img width="500" height="296"
+                                                                src="images/djtable.png"
+                                                                class="attachment-post-thumbnail size-post-thumbnail wp-post-image lazyload"
+                                                                alt="" loading="lazy">
+                                                                 </a></p>
+                                                    <p><a href="blogi/b1-sex-on-dj-table.html"><br>
+                                                        Ob 20.00 jo pospremim na bus.
+                    <br> Tam me praša zakaj želim imet 3 dekleta hkrati.
+                    <br> Vprašam kdaj je prebrala to. Odgovori “takoj”</p>
+                                                    <p></p>
                                                 </div>
                                             </div>
 
-            <div class="blog-card">
-                <img src="images/collage.png" alt="Mladi Kralj" class="blog-card-image">
-                <div class="blog-card-content">
-                    <h3 class="blog-card-title">Mladi Kralj</h3>
-                    <p class="blog-card-excerpt">Learning to lead with confidence and authority in all aspects of life.</p>
-                    <a href="blogi/n8Mladikralj.html" class="blog-card-link">
-                        Read Story <span class="blog-card-arrow">→</span>
-                    </a>
+                                            <div class="row ">
+                                                <div class="top">
+                                                    <h3><a href="blogi/b1-sex-on-dj-table.html">
+                                                        Rožna Take down </a></h3>
+                                                    <p></p>
+                                                </div>
+                                                <div class="inside ">
+                                                    <p><a href="blogi/b1-sex-on-dj-table.html">
+                                                            <img width="500" height="296"
+                                                                src="images/djtable.png"
+                                                                class="attachment-post-thumbnail size-post-thumbnail wp-post-image lazyload"
+                                                                alt="" loading="lazy">
+                                                                 </a></p>
+                                                    <p><a href="blogi/b1-sex-on-dj-table.html"><br>
+                                                        5. Punci k gre mem... Dej naredi krog. ... O my god, I love how your ass shakes.
+                                                        <br> 6. Omg kak lepa rit in te yoške. Llll olmlll kak so lepe. I llllove that black tities
+                                                        . </a>
+                                                    </p>
+                                                    <p></p>
                                                 </div>
                                             </div>
                                             
-            <div class="blog-card">
-                <img src="images/collage.png" alt="Zlato Krilo" class="blog-card-image">
-                <div class="blog-card-content">
-                    <h3 class="blog-card-title">Zlato Krilo</h3>
-                    <p class="blog-card-excerpt">The golden wing – a story about finding your unique strengths and using them to your advantage.</p>
-                    <a href="blogi/n8Zlatokrilo.html" class="blog-card-link">
-                        Read Story <span class="blog-card-arrow">→</span>
-                    </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
             </div>
         </div>
 
-            <div class="blog-card">
-                <img src="images/collage.png" alt="Joker" class="blog-card-image">
-                <div class="blog-card-content">
-                    <h3 class="blog-card-title">Joker</h3>
-                    <p class="blog-card-excerpt">Sometimes you have to be the wild card to get what you want, but always know when to fold.</p>
-                    <a href="blogi/n9Joker.html" class="blog-card-link">
-                        Read Story <span class="blog-card-arrow">→</span>
-                    </a>
+        <div class="section">
+            <div id="footer">
+                <div class="container">
+                    <div class="col-xs-12">
+                        <div class="menu-header-menu-container">
+                            <ul>
+                                <li id="item-id"><?php __( "Menu:", "textdomain" ); ?></li>
+                                <li id="menu-item-8556"
+                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-8556"><a
+                                        href="http://jackbase.me/en/blog/fratire-blog.html">Blog</a></li>
+                                <li id="menu-item-8557" c
+                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-8557"><a
+                                        href="../../home.html">My Page</a></li>
+                                <li id="menu-item-8558"
+                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-8558"><a
+                                        href="../../contact.html">Contact me</a>
+                                </li>
+                                <li id="menu-item-8560"
+                                    class="menu-item menu-item-type-post_type menu-item-object-post menu-item-8560"><a
+                                        href="../../bio.html">About me</a></li>
+                                <li id="menu-item-8559"
+                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8559"><a
+                                        href="../../work.html">My work</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+       
+       
+         
     </div>
     
-    <script src="../../js/webflow.js"></script>
+   
 </body>
+
 </html>

@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tessa Girl Next Door Horses</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        h2 {
+            font-size: 2em;
+            font-weight: bold;
+            color: #333;
+            margin: 40px 0 20px 0;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+        }
+        
+        h3 {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #555;
+            margin: 30px 0 15px 0;
+        }
+        
+        .section {
+            margin: 40px 0;
+            padding: 20px;
+            background-color: #fafafa;
+            border-radius: 8px;
+        }
+        
+        .bio-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 40px;
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+        
+        .bio-text {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .discount-caption {
+            font-size: 1.2em;
+            color: #666;
+            margin: 20px 0;
+        }
+        
+        .vip-section {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+        
+        .vip-title {
+            font-size: 2.2em;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .vip-benefits {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .vip-benefits li {
+            font-size: 1.3em;
+            margin: 15px 0;
+            padding: 10px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 8px;
+        }
+        
+        .mass-message {
+            background-color: #2c3e50;
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+        
+        .mass-title {
+            font-size: 2em;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .mass-content {
+            font-size: 1.2em;
+            line-height: 1.8;
+        }
+        
+        .promise-section {
+            background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .promise-text {
+            font-size: 1.4em;
+            font-style: italic;
+            line-height: 1.8;
+        }
+        
+        .image-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .link-section {
+            background-color: #ecf0f1;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .link-section a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .link-section a:hover {
+            text-decoration: underline;
+        }
+        
+        .follow-up-message {
+            background-color: #34495e;
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            font-size: 1.1em;
+        }
+        
+        .message-text {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 8px;
+        }
+        
+        .introduction-section {
+            background-color: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+        
+        .introduction-text {
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: #2c3e50;
+        }
+        
+        .upsell-section {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+        
+        .upsell-title {
+            font-size: 1.8em;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .upsell-content {
+            font-size: 1.1em;
+            line-height: 1.7;
+        }
+        
+        .upsell-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .upsell-list li {
+            margin: 15px 0;
+            padding: 15px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            font-size: 1.1em;
+        }
+        
+        .upsell-list li strong {
+            font-size: 1.2em;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            h2 {
+                font-size: 1.5em;
+            }
+            
+            .bio-text {
+                font-size: 1.4em;
+            }
+            
+            .vip-title {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Traffic Setup</h1>
+        
+        <div class="section">
+            <h2>Ig Link with Simple Caption</h2>
+            <div class="image-container">
+                <img src="images/img3.png" alt="Instagram Link Screenshot">
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Website Like</h2>
+            <div class="link-section">
+                <a href="https://zuzinkaa.com/" target="_blank">https://zuzinkaa.com/</a><br>
+                <a href="https://lindacaprice.com/" target="_blank">https://lindacaprice.com/</a>
+            </div>
+        </div>
+        
+        <div class="image-container">
+                <img src="images/img4.png" alt="Website Screenshot">
+        </div>
+        
+        <div class="section">
+            <h2>First Page View</h2>
+            <h3>Simple Bio</h3>
+            
+            <div class="bio-section">
+                <div class="bio-text">Welcome to my life 🐎<br>Can you ride with me? One step away from finding out</div>
+            </div>
+            
+            <div class="discount-caption">Simple discount caption</div>
+            
+            <div class="bio-section">
+                <div class="bio-text">You know, You want it! :)</div>
+            </div>
+        </div>
+        
+        <div class="image-container">
+                <img src="images/img5.png" alt="Page View Screenshot">
+        </div>
+        
+        <div class="image-container">
+                <img src="images/img2.png" alt="Page View Screenshot 2">
+        </div>
+        
+        <div class="introduction-section">
+            <h2>Introduction</h2>
+            <div class="image-container">
+                <img src="images/img6.png" alt="Introduction Screenshot">
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>The Follow-Up</h2>
+            <div class="image-container">
+                <img src="images/img7.png" alt="Follow-Up Screenshot">
+            </div>
+            
+            <div class="follow-up-message">
+                <div class="message-text">oh hi i just saw this</div>
+                <div class="message-text">i was just about to ask what brought you to my page</div>
+                <div class="message-text">
+                    <a href="https://onlyfans.com/camillaxaraujo" target="_blank">Visit OnlyFans</a>
+                </div>
+                <div class="message-text">but let me guess... you wanted to see if you were cowboy enough to handle this ride, didn't ya?</div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Mass Message VIP</h2>
+            <div class="image-container">
+                <img src="images/img8.png" alt="Mass Message VIP Screenshot">
+            </div>
+            
+            <div class="vip-section">
+                <div class="vip-title">🐎 YOU'RE INVITED TO TESSA RIDING CLUB</div>
+                <div class="vip-content">
+                    <p>Congrats! ur one of 20 ppl invited to experience unrestricted access to my <em>Hardcore Riding Debut</em></p>
+                    
+                    <div style="text-align: center; font-size: 1.5em; margin: 20px 0;">
+                        Tessa's 🐎🏇🏼🏇🏽🏇🏾🏇🏿
+                    </div>
+                    
+                    <ul class="vip-benefits">
+                        <li>✅ Weekly RIDING TIPS + FREE Stable Pass</li>
+                        <li>✅ UNRELEASED Barn footage</li>
+                        <li>✅ Unlimited Dick Ratings</li>
+                        <li>✅ Weekly FREEBIES + FREE Sub</li>
+                        <li>✅ PERSONALIZED Welcome Gift</li>
+                    </ul>
+                    
+                    <div style="text-align: center; margin: 30px 0;">
+                        <em>and the request you've all been waiting for:</em>
+                    </div>
+                    
+                    <div style="text-align: center; font-size: 1.8em; margin: 20px 0;">
+                        🐱 MY FIRST GRAND CHAMPION JUMPING VIDEO 🐱
+                    </div>
+                    
+                    <p style="text-align: center;">(Show Jumping, Solo Rides, Dressage, Group Trail Rides + UNRELEASED Barn footage)</p>
+                    
+                    <p>Oh and btw, once you've joined let's just say you may NEVER have to pay for content again 😉</p>
+                    
+                    <p>Just open the message & send me a 🐎 to claim your spot!</p>
+                    
+                    <p style="text-align: center; margin-top: 30px;">
+                        <em>Congrats! I can't wait to start spoiling you!! - Tessa 🐎</em>
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Dom MASS</h2>
+            <h3>Your Privilege to Pay: My Secret Vault</h3>
+            
+            <div class="introduction-text">
+                <p>This is a one-time offering, a test of your devotion. You have a single, 30-minute window to access My VIP Content. Don't expect this easy path again. The next time, you will earn your way in by becoming a Lifetime VIP.</p>
+                
+                <p>Once you have paid your tribute, you will gain access to:</p>
+                
+                <ul class="upsell-list">
+                    <li><strong>My Exclusive Tapes:</strong> Private moments you are unworthy of.</li>
+                    <li><strong>My Bare Ass:</strong> A view reserved for those who know their place.</li>
+                    <li><strong>My Nipple Content:</strong> A taste of what you will never touch.</li>
+                    <li><strong>My Pink, Juicy Lips:</strong> Both of them, begging to be used.</li>
+                    <li><strong>My POVs:</strong> So you can watch exactly what I command you to.</li>
+                </ul>
+                
+                <p>Your obedience in unlocking this will put you in a very good position to become My VIP. You will also be rewarded with a 33% discount on the first Secret Vault Riding Tape, a pleasure you will owe me for.</p>
+                
+                <p>By opening this, you agree to never share or leak a single frame of the content within. Disobey, and you will face the consequences. You have been warned.</p>
+            </div>
+            
+            <div class="image-container">
+                <img src="images/img1.png" alt="Secret Vault Screenshot">
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>FROM MASS PPV PURCHASE TO UPSALE FUNNEL</h2>
+            <div class="image-container">
+                <img src="images/img9.png" alt="PPV Purchase Screenshot">
+            </div>
+            
+            <div class="image-container">
+                <img src="images/img10.png" alt="Upsale Funnel Screenshot 1">
+            </div>
+            
+            <div class="image-container">
+                <img src="images/img11.png" alt="Upsale Funnel Screenshot 2">
+            </div>
+            
+            <div class="section">
+                <h3>When he buys I PROMISE you send</h3>
+                <div class="image-container">
+                    <img src="images/img12.png" alt="Promise Screenshot">
+                </div>
+            </div>
+        </div>
+        
+        <div class="promise-section">
+            <div class="promise-text">
+                I promise and swear<br>
+                to always and forever<br>
+                worship Tessa<br>
+                My perfect<br>
+                Grand Champion<br>
+                Your stable is<br>
+                my only home.<br>
+                I will not lose<br>
+                the pace.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

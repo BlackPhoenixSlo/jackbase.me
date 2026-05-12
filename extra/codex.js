@@ -77,11 +77,11 @@ const ELIXIR = {
   'goblin-barrel': 3, 'skeleton-barrel': 3,
   // 4
   'hog-rider': 4, 'mini-pekka': 4, 'valkyrie': 4, 'royal-ghost': 4,
-  'baby-dragon': 4, 'musketeer': 4, 'inferno-dragon': 4, 'hunter': 4,
+  'baby-dragon': 4, 'musketeer': 4, 'inferno-dragon': 4,
   'magic-archer': 4, 'electro-wizard': 4, 'dark-prince': 4,
   'lumberjack': 4, 'mother-witch': 4, 'golden-knight': 4,
   'battle-ram': 4, 'goblin-demolisher': 4, 'mighty-miner': 4,
-  'flying-machine': 4, 'zappies': 4,
+  'flying-machine': 4, 'zappies': 4, 'goblin-drill': 4,
   'tesla': 4, 'bomb-tower': 4, 'furnace': 4, 'goblin-cage': 4, 'mortar': 4,
   'fireball': 4, 'poison': 4, 'freeze': 4,
   // 5
@@ -89,11 +89,11 @@ const ELIXIR = {
   'goblin-machine': 5, 'prince': 5, 'bowler': 5, 'executioner': 5,
   'wizard': 5, 'rascals': 5, 'monk': 5, 'royal-chef': 5,
   'goblinstein': 5, 'inferno-tower': 5, 'goblin-hut': 5,
-  'graveyard': 5,
+  'graveyard': 5, 'cannon-cart': 5, 'hunter': 5,
   // 6
   'royal-giant': 6, 'giant-skeleton': 6, 'elite-barbarians': 6,
   'elixir-collector': 6, 'barbarian-hut': 6,
-  'x-bow': 6, 'xbow': 6, 'goblin-drill': 6,
+  'x-bow': 6, 'xbow': 6,
   'lightning': 6, 'rocket': 6,
   // 7
   'electro-giant': 7, 'lava-hound': 7, 'pekka': 7, 'royal-recruits': 7,
@@ -618,14 +618,17 @@ function slugToName(slug) {
 function cardChip(slug, opts) {
   opts = opts || {};
   const name = slugToName(slug);
+  const cost = elixir(slug);
   const cls = ['card-chip'];
   if (opts.mini) cls.push('mini');
   if (state.filterCards.has(slug)) cls.push('active');
   // The label is always rendered. CSS hides it for mini chips on success;
   // onerror flips the chip to .no-img which shows the label as fallback.
-  return `<button type="button" class="${cls.join(' ')}" data-card="${slug}" title="${name}" aria-label="Filter by ${name}">
+  // The elixir badge in the corner makes the elixir sort visible.
+  return `<button type="button" class="${cls.join(' ')}" data-card="${slug}" data-cost="${cost}" title="${name} • ${cost} elixir" aria-label="Filter by ${name}, costs ${cost} elixir">
     <img src="${CARD_BASE}/${slug}.png" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img'); this.remove();">
     <span class="card-chip-label">${name}</span>
+    <span class="elixir-badge" aria-hidden="true">${cost}</span>
   </button>`;
 }
 

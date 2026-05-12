@@ -130,13 +130,15 @@
 
   .matchup-header {
     display: flex;
-    align-items: center;
-    padding: 18px 22px;
+    align-items: flex-start;
+    padding: 16px 22px;
     cursor: pointer;
     user-select: none;
     gap: 18px;
     flex-wrap: wrap;
   }
+  .matchup-header .num { padding-top: 4px; }
+  .matchup-header .arrow { padding-top: 8px; margin-left: auto; }
   .num {
     font-family: 'Bungee', cursive;
     font-size: 1.8rem;
@@ -228,6 +230,332 @@
   }
   footer a { color: var(--gold); text-decoration: none; }
 
+  /* ---------- Decks, search & filter ---------- */
+  .card-index {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    padding: 14px 16px 4px;
+    margin-bottom: 18px;
+  }
+  .index-label {
+    font-size: 0.8rem;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  .index-hint {
+    color: var(--text-dim);
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0.5px;
+    font-size: 0.7rem;
+    margin-left: 8px;
+  }
+  .index-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+  .index-toggle {
+    background: transparent;
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .index-toggle:hover { color: var(--gold); border-color: var(--gold); }
+  .index-body { transition: opacity 0.2s; }
+  .index-body[hidden] { display: none; }
+
+  .index-group { margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px dotted rgba(255,255,255,0.04); }
+  .index-group:last-child { border-bottom: 0; }
+  .index-group-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--blue);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 6px;
+  }
+  .index-group-count {
+    color: var(--text-dim);
+    margin-left: 4px;
+    font-weight: 400;
+  }
+  /* Flat index row: a single flex-wrap line per category, with inline
+     "5+ ⚡" / "4 ⚡" / "3- ⚡" pills as separators between cost buckets.
+     Far more compact than one line per bucket after a filter narrows results. */
+  .index-row-flat {
+    align-items: center;
+    gap: 5px;
+  }
+  .cost-label {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    padding: 3px 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 1px;
+    color: var(--gold);
+    background: rgba(255,200,87,0.07);
+    border: 1px solid var(--gold-dim);
+    border-radius: 12px;
+    margin: 0 4px 0 2px;
+  }
+  .cost-label:first-child { margin-left: 0; }
+  .cost-elixir {
+    color: var(--purple);
+    font-size: 0.7rem;
+    margin-left: 1px;
+  }
+  .player-deck-bar {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--purple);
+    padding: 10px 14px;
+    margin: 30px 0 10px;
+    opacity: 0.78;
+  }
+  .player-deck-bar:hover { opacity: 1; }
+  .deck-label {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .deck-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+  }
+  .deck-group { margin-bottom: 0; }
+  .deck-group-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--blue);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 5px;
+  }
+  /* Flex-wrap: sections sit next to each other when they fit, wrap when full.
+     Each .deck-group sizes to its contents — no wasted columns. */
+  .deck-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 22px;
+    margin-bottom: 18px;
+    align-items: flex-start;
+  }
+  .deck-grid > .deck-group {
+    flex: 0 0 auto;
+  }
+  .deck-grid > .group-extras { flex-basis: 100%; }
+  .deck-group-label { white-space: nowrap; }
+  .card-chip {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 4px 6px 4px 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    font-family: 'Oswald', sans-serif;
+    color: var(--text);
+    font-size: 0.8rem;
+    transition: all 0.15s;
+  }
+  .card-chip:hover {
+    border-color: var(--gold);
+    background: rgba(255,200,87,0.08);
+    transform: translateY(-1px);
+  }
+  .card-chip.active {
+    border-color: var(--red);
+    background: rgba(255,58,76,0.18);
+    box-shadow: 0 0 0 1px var(--red) inset;
+  }
+  .card-chip img {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+    background: rgba(0,0,0,0.25);
+    border-radius: 3px;
+  }
+  .card-chip-label {
+    padding-right: 4px;
+    letter-spacing: 0.5px;
+  }
+  .card-chip.mini { padding: 2px; gap: 0; }
+  .card-chip.mini img { width: 40px; height: 40px; }
+  .card-chip.mini .card-chip-label { display: none; }
+
+  /* Fallback when the card icon 404s — show the name as text inside the chip. */
+  .card-chip.no-img {
+    background: rgba(255,200,87,0.06);
+    border-style: dashed;
+    border-color: var(--gold-dim);
+  }
+  .card-chip.no-img .card-chip-label {
+    display: inline-block;
+    padding: 4px 6px;
+    font-size: 0.7rem;
+    text-align: center;
+    line-height: 1.1;
+    color: var(--gold);
+  }
+  .card-chip.mini.no-img {
+    width: 44px;
+    min-width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+  }
+  .card-chip.mini.no-img .card-chip-label {
+    font-size: 0.5rem;
+    padding: 2px;
+    max-width: 40px;
+    word-break: break-word;
+  }
+
+  /* Win Conditions group gets a stronger accent so it's the first thing you see. */
+  .index-group-emphasize .index-group-label {
+    color: var(--gold);
+    font-size: 0.8rem;
+  }
+  .index-group-emphasize .card-chip.mini {
+    border-color: var(--gold-dim);
+  }
+  .index-group-emphasize .card-chip.mini:hover {
+    border-color: var(--gold);
+  }
+
+  footer a { color: var(--gold); text-decoration: none; border-bottom: 1px dotted var(--gold-dim); }
+  footer a:hover { border-bottom-style: solid; }
+
+  .main-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin: 8px 0 6px;
+  }
+  .search-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .search-bar input {
+    flex: 1;
+    min-width: 220px;
+    background: var(--bg-2);
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 11px 14px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    outline: none;
+  }
+  .search-bar input:focus { border-color: var(--gold); }
+  .search-bar input::placeholder { color: var(--text-dim); }
+  .diff-row {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .diff-btn {
+    background: var(--bg-2);
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+    padding: 8px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .diff-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .diff-btn.active {
+    background: rgba(255,200,87,0.12);
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+  .active-filters {
+    display: none;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+    margin-bottom: 16px;
+    padding: 10px 12px;
+    background: rgba(255,58,76,0.05);
+    border: 1px dashed var(--red);
+  }
+  .filter-tag-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--red);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-right: 4px;
+  }
+  .filter-tag {
+    background: rgba(255,58,76,0.15);
+    border: 1px solid var(--red);
+    color: var(--text);
+    padding: 4px 8px 4px 4px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.8rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .filter-tag img { width: 22px; height: 22px; object-fit: contain; }
+  .filter-tag:hover { background: rgba(255,58,76,0.25); }
+  .filter-clear {
+    background: transparent;
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    margin-left: auto;
+  }
+  .filter-clear:hover { color: var(--gold); border-color: var(--gold); }
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-dim);
+    font-family: 'JetBrains Mono', monospace;
+    border: 1px dashed var(--border);
+    margin-bottom: 14px;
+  }
+  .matchup.universal { border-left-color: var(--purple); }
+  .matchup.universal .num { color: var(--purple); }
+  .matchup.universal .matchup-title { color: var(--purple); }
+  .content h4 + .deck-row { margin-bottom: 18px; }
+
   @media (max-width: 600px) {
     .num { font-size: 1.4rem; min-width: 40px; }
     .matchup-title { font-size: 1.1rem; }
@@ -235,6 +563,8 @@
     .matchup-header { padding: 14px 16px; gap: 12px; }
     .content { padding: 0 16px; }
     .matchup.open .content { padding: 0 16px 20px 16px; }
+    .card-chip img { width: 30px; height: 30px; }
+    .card-chip-label { display: none; }
   }
 </style>
 </head>
@@ -246,923 +576,42 @@
     <div class="subtitle">⚔ Matchup Guide • 24 Decks ⚔</div>
     <div class="stat-bar">
       <span>DECKS: <b>24</b></span>
+      <span>SHOWING: <b id="stat-visible">24</b></span>
       <span>RUNTIME: <b>1H 43M</b></span>
       <span>META: <b>MAR 2026</b></span>
     </div>
   </header>
+
+  <div id="card-index" class="card-index"></div>
+
+  <div class="search-bar">
+    <input id="search-input" type="search" placeholder="Search matchup, note, or card…" autocomplete="off">
+    <div class="diff-row">
+      <button type="button" class="diff-btn active" data-diff="all">All</button>
+      <button type="button" class="diff-btn" data-diff="easy">Easy</button>
+      <button type="button" class="diff-btn" data-diff="med">Medium</button>
+      <button type="button" class="diff-btn" data-diff="hard">Hard</button>
+    </div>
+  </div>
+
+  <div id="active-filters" class="active-filters"></div>
 
   <div class="controls">
     <button class="ctrl-btn" onclick="expandAll()">▼ Expand All</button>
     <button class="ctrl-btn" onclick="collapseAll()">▲ Collapse All</button>
   </div>
 
-  <div id="matchups">
-    <div class="matchup">
-      <div class="matchup-header" onclick="toggle(this)">
-        <div class="num">01</div>
-        <div class="title-block">
-          <div class="matchup-title">Giant Graveyard <span class="badge hard">Hard</span></div>
-          <div class="matchup-short">Tornado splash to King • Hog opposite lane • Save Valk for Giant/Mini Pekka</div>
-        </div>
-        <div class="arrow">▼</div>
-      </div>
-      <div class="content">
-        <div class="content-inner">
-          <h4>Full Notes</h4>
-          <ul><li>Tornado their splash unit (Mini Pekka, etc.) to King Tower early</li><li><strong>King Tower active = leaking is fine</strong></li><li>Hog down the middle vs Bowler/Executioner to protect Exi</li><li>Save Valk for Giant and Mini Pekka</li><li>Use Goblins to DPS Giant + block Graveyard skeletons</li><li>Play Hog <em>opposite lane</em> to prevent Bowler + Giant stack</li><li>Hover rocket on counter pushes for Bowler/Mini Pekka/Musk value</li><li>Cycle Bowler mid = free rocket value</li><li>When counter pushing Valk + Hog, hover NATO to pull Musk/Bowler</li></ul>
-        </div>
-      </div>
-    </div>
-  
-    <div class="matchup">
-      <div class="matchup-header" onclick="toggle(this)">
-        <div class="num">02</div>
-        <div class="title-block">
-          <div class="matchup-title">Mortar Lightning <span class="badge hard">Hard</span></div>
-          <div class="matchup-short">Don't get caught down elixir • Rocket stacked Cannon Cart + Mortar</div>
-        </div>
-        <div class="arrow">▼</div>
-      </div>
-      <div class="content">
-        <div class="content-inner">
-          <h4>Full Notes</h4>
-          <ul><li><em>Never get caught down elixir</em></li><li>Outside mortar, their defense is weak — abuse no-mortar moments</li><li>NATO Ghost to King ASAP to activate it</li><li>If Cannon Cart + Mortar stacked → <strong>rocket both</strong></li><li>Never stack Valk + Exi close (double lightning bait)</li><li>Only Hog + Exi at river if they have <em>no Cannon Cart in hand</em></li><li>Vs Evo Mortar w/o rocket: split Goblins mid + Hog across to DPS</li><li>When up damage, play passive not aggressive</li><li>Save Evo Valk for Goblinstein counter push</li></ul>
-        </div>
-      </div>
-    </div>
-  
-    <div class="matchup">
-      <div class="matchup-header" onclick="toggle(this)">
-        <div class="num">03</div>
-        <div class="title-block">
-          <div class="matchup-title">E-Giant Lightning <span class="badge hard">Hard</span></div>
-          <div class="matchup-short">One of the WORST matchups • Survive single, rocket cycle in triple</div>
-        </div>
-        <div class="arrow">▼</div>
-      </div>
-      <div class="content">
-        <div class="content-inner">
-          <h4>Full Notes</h4>
-          <ul><li><em>One of the worst matchups alongside Icebow</em></li><li>Goal: survive single → rocket cycle in triple</li><li>Kite Inferno + Baby Dragon to opposite lane (Goblins/Ice Spirit)</li><li><strong>Priority: cycle to Evo Valk</strong></li><li>If Egiant has solo card in a lane → put Hog/Valk opposite</li><li>Hog same time as E-Giant to prevent lightning combo</li><li>Hero Goblins: destroy Cages, tank Golden Knight, counter Inferno</li><li>Use Bowler to push Valk out of lightning range</li><li>Two Exis high = bridge control, forces wasted lightning</li></ul>
-        </div>
-      </div>
-    </div>
-  
-    <div class="matchup">
-      <div class="matchup-header" onclick="toggle(this)">
-        <div class="num">04</div>
-        <div class="title-block">
-          <div class="matchup-title">Royal Giant <span class="badge med">Medium</span></div>
-          <div class="matchup-short">Don't Hog without NATO • Valk same lane • Evo Exi shreds RG</div>
-        </div>
-        <div class="arrow">▼</div>
-      </div>
-      <div class="content">
-        <div class="content-inner">
-          <h4>Full Notes</h4>
-          <ul><li>Don't Hog without NATO/counter-push cards in single</li><li>Leak and save Valk for RG</li><li>RG in back → <strong>Valk same lane</strong></li><li>Exi to DPS RG, Goblins to block Fisherman</li><li>Better to defend RG cleanly than force a bad counter push</li><li>Hover NATO — tornado Fisherman away before it pulls Hog to King</li><li><strong>Evo Exi double damage shreds RG</strong></li><li>Play passive, wait for one chance to NATO Fisherman opposite lane</li></ul>
-        </div>
-      </div>
-    </div>
-  
-    <div class="matchup">
-      <div class="matchup-header" onclick="toggle(this)">
-        <div class="num">05</div>
-        <div class="title-block">
-          <div class="matchup-title">Golem Lightning <span class="badge hard">Hard</span></div>
-          <div class="matchup-short">Aggressive Hogs in single • Hover Exi high • Every HP matters</div>
-        </div>
-        <div class="arrow">▼</div>
-      </div>
-      <div class="content">
-        <div class="content-inner">
-          <h4>Full Notes</h4>
-          <ul><li>Be aggressive with Hogs in single — don't let early damage lead</li><li>Block Baby Dragon + Ice Wiz from hitting Exi (prevents lightning kill)</li><li>Don't place Valk in back — Baby Dragon splashes tower 3-4×</li><li>Hog opposite lane from Brawler so you can NATO Brawler to King</li><li><strong>Hover Exi high</strong> to snipe supports + force lightning away</li><li>NATO Golem back to reduce damage</li><li><em>Every HP matters for rocket/lightning cycle</em></li><li>Evo Valk + Evo Exi defend without extra elixir</li><li>After they lightning, immediately pressure with Hog + Goblins</li></ul>
-        </div>
-      </div>
-    </div>
-  
-    <div class="matchup">
-      <div class="matchup-header" onclick="toggle(this)">
-        <div class="num">06</div>
-        <div class="title-block">
-          <div class="matchup-title">Balloon Freeze <span class="badge med">Medium</span></div>
-          <div class="matchup-short">ALWAYS rocket Balloon • Hog freely • Learn tornado-to-king tech</div>
-        </div>
-        <div class="arrow">▼</div>
-      </div>
-      <div class="content">
-        <div class="content-inner">
-          <h4>Full Notes</h4>
-          <ul><li><strong>60/40 in Hog Exe's favor</strong> (harder post-Exi nerf)</li><li><em>ALWAYS rocket the Balloon — push it BACK, not toward your tower</em></li><li>Hog freely — they can't punish it</li><li>Hero Goblins strong (their only small spell is Barb Barrel)</li><li>Pop Goblin ability to block Tornado or pull Dragon back</li><li>If caught w/o rocket: Tornado Balloon to King (learn placement)</li><li>Counter-pushing Exi → always Hog with it to force NATO</li><li>Don't play Evo Valk in back — bridge Balloon pulls Valk to tower</li><li>Ice Spirit + NATO mid-map Balloon → free King activation</li><li>If they Freeze on defense, their next Balloon push is toothless</li></ul>
-        </div>
-      </div>
-    </div>
-  
-    <div class="matchup">
-      <div class="matchup-header" onclick="toggle(this)">
-        <div class="num">07</div>
-        <div class="title-block">
-          <div class="matchup-title">Giant Double Prince <span class="badge med">Medium</span></div>
-          <div class="matchup-short">Don't Hog if Prince in hand • Valk in front of King vs Dark Prince</div>
-        </div>
-        <div class="arrow">▼</div>
-      </div>
-      <div class="content">
-        <div class="content-inner">
-          <h4>Full Notes</h4>
-          <ul><li>Don't Hog in single if Prince might be in hand</li><li><strong>Valk → Dark Prince | Goblins → Prince | Exi → Giant + Mega Minion</strong></li><li>Hero Goblins ability often enough vs Prince — pop with Ice Spirit</li><li>Dark Prince from back → <em>play Valk in front of King</em> (no splash)</li><li>Play Exi out of range of Giant's swing</li><li>Evo Exi cleans Giant + Prince with double damage</li><li>In double: safer to Hog counter-push with Exi + Evo Valk</li><li>Save Evo Valk for Giant push; use Exi + Goblins for Dark Prince</li><li>Play Evo Valk FAR from Giant so Giant punches a Goblin</li></ul>
-        </div>
-      </div>
-    </div>
-  
-    <div class="matchup">
-      <div class="matchup-header" onclick="toggle(this)">
-        <div class="num">08</div>
-        <div class="title-block">
-          <div class="matchup-title">Giant Skull BridgeSpam <span class="badge med">Medium</span></div>
-          <div class="matchup-short">Tornado Ghost to King • Exi (not Valk) into Giant Skelly</div>
-        </div>
-        <div class="arrow">▼</div>
-      </div>
-      <div class="content">
-        <div class="content-inner">
-          <h4>Full Notes</h4>
-          <ul><li>Play cautious in single — don't Hog with counter-push Exi early</li><li><strong>Tornado Ghost to King immediately</strong></li><li>Prefer <em>Exi over Valk</em> for Giant Skelly</li><li>Save Valk for Dark Prince, Ghost, Ram</li><li>Use Goblins to pull everything into Exi</li><li>Ram → <strong>Goblins LOW</strong> (in case of Wizard/Mother Witch)</li><li>NATO Mother Witch/Wizard to opposite lane</li><li>Evo Valk pulls Mother Witch to opposite lane</li><li>Vs Evo Ghost: always have Valk ready (no Goblins risk)</li></ul>
-        </div>
-      </div>
-    </div>
-  
-    <div class="matchup">
-      <div class="matchup-header" onclick="toggle(this)">
-        <div class="num">09</div>
-        <div class="title-block">
-          <div class="matchup-title">Miner Balloon (2.9) <span class="badge hard">Hard</span></div>
-          <div class="matchup-short">ZERO Balloon hits all game • Hog same time as Miner Balloon</div>
-        </div>
-        <div class="arrow">▼</div>
-      </div>
-      <div class="content">
-        <div class="content-inner">
-          <h4>Full Notes</h4>
-          <ul><li><em>Super tough — play near-perfectly</em></li><li><strong>Take ZERO Balloon hits the entire 5 minutes</strong></li><li>Hog same time as Miner Balloon — they can't defend both</li><li>Always keep Rocket + Goblins in hand when they have Miner + Balloon</li><li>Don't Exi into Musk if it leaves you w/o rocket/goblins</li><li>Goblins on Miner = tower + gobs DPS Miner before Balloon hits</li><li>Cycle Exi when they have no Balloon in hand</li><li>Block for Exi using Valk + Ice Spirit</li><li>Don't Hog vs Bomb Tower — wait until they go Miner Balloon</li><li><strong>Track Evo Musketeer cycle</strong> — getting caught off guard is costly</li></ul>
-        </div>
-      </div>
-    </div>
-  
-    <div class="matchup">
-      <div class="matchup-header" onclick="toggle(this)">
-        <div class="num">10</div>
-        <div class="title-block">
-          <div class="matchup-title">Archer Queen Pigs (2.9) <span class="badge easy">Easy</span></div>
-          <div class="matchup-short">Play passive in single • Defend Pigs → rocket tower • Rarely Hog</div>
-        </div>
-        <div class="arrow">▼</div>
-      </div>
-      <div class="content">
-        <div class="content-inner">
-          <h4>Full Notes</h4>
-          <ul><li><strong>Good matchup</strong> — play passive in single to avoid Pigs damage</li><li>Rarely worth Hogging</li><li>Loop: defend Pigs → rocket tower</li><li>King activation: Goblins one side + NATO other Pigs to King</li><li>Valk + Hog if they're down elixir (Valk one-shots Ice Spirit)</li><li>Don't rocket Queen until triple</li><li>If Queen counter-pushes with split Pigs → Exi in Queen lane splashes both</li><li>No Rocket for Pigs? Ice Spirit Exi or NATO Exi works</li><li>Don't overcommit — one bad play loses both towers</li></ul>
-        </div>
-      </div>
-    </div>
-  
-    <div class="matchup">
-      <div class="matchup-header" onclick="toggle(this)">
-        <div class="num">11</div>
-        <div class="title-block">
-          <div class="matchup-title">Hog Lightning <span class="badge med">Medium</span></div>
-          <div class="matchup-short">Ice Spirit/Log resets Mighty Miner • Don't over-rocket in triple</div>
-        </div>
-        <div class="arrow">▼</div>
-      </div>
-      <div class="content">
-        <div class="content-inner">
-          <h4>Full Notes</h4>
-          <ul><li>Get cycle right for double + triple; don't take Hog damage to King</li><li>Evo Furnace annoying — save Valk+Log or Exi+Log to clear it</li><li><strong>Ice Spirit/Log resets Mighty Miner charge</strong> (saves Valk)</li><li>Don't over-rocket in triple — lose lightning cycle</li><li>Exi same lane as Furnace OK in single (play early, before fire spirits)</li><li>Don't stack Valk + Exi (easy lightning)</li><li>Abuse Hero Goblins ability — free damage on range troops</li><li>When you Exi a Hog → <em>always Hog yourself</em> to block lightning</li><li>Force Mighty Miner to switch lanes = reduces his threat</li><li>Don't be scared to NATO offense if you have Evo Exi/Valk for defense</li></ul>
-        </div>
-      </div>
-    </div>
-  
-    <div class="matchup">
-      <div class="matchup-header" onclick="toggle(this)">
-        <div class="num">12</div>
-        <div class="title-block">
-          <div class="matchup-title">Recruits Spam <span class="badge hard">Hard</span></div>
-          <div class="matchup-short">DON'T LOSE IN SINGLE • Mighty Miner WILL swap • Hover Exi</div>
-        </div>
-        <div class="arrow">▼</div>
-      </div>
-      <div class="content">
-        <div class="content-inner">
-          <h4>Full Notes</h4>
-          <ul><li><em>DON'T LOSE IN SINGLE — that's the entire key</em></li><li>Valk/Exi one lane → opponent <strong>almost always</strong> swaps with Mighty Miner</li><li>Keep Ice Spirit to reset Mighty Miner</li><li>Keep Exi + Valk healthy — DPS'd troops can't defend anything</li><li>OK to let small damage through (Minions/Wall Breakers) if hand is bad</li><li><strong>King Tower essential</strong> — use Wall Breakers to activate</li><li><strong>Hover Exi rather than placing</strong> — wait for lane swap</li><li>Tornado Minions into Exi (no other good response)</li><li>Out of single: matchup is almost free</li></ul>
-        </div>
-      </div>
-    </div>
-  
-    <div class="matchup">
-      <div class="matchup-header" onclick="toggle(this)">
-        <div class="num">13</div>
-        <div class="title-block">
-          <div class="matchup-title">Hyperbait <span class="badge easy">Easy</span></div>
-          <div class="matchup-short">Free matchup • Hog into Bush + Log • Save Exi for Skeleton Barrel</div>
-        </div>
-        <div class="arrow">▼</div>
-      </div>
-      <div class="content">
-        <div class="content-inner">
-          <h4>Full Notes</h4>
-          <ul><li><strong>Pretty free in current meta</strong> (Rocket version harder than Fireball)</li><li>Bush = confirmed Hyperbait → Hog into it + Log = multi-card value</li><li>Get King Tower — huge vs spam</li><li><strong>Save Exi for Skeleton Barrel + Rascals</strong> (best counter)</li><li>Valk → Ghost / counter pushes</li><li>Log → Goblins, Bush, Dark Goblin</li><li>Don't overcommit in single</li><li>Tornado Dark Goblin into Valk (otherwise impossible to log)</li><li>Hog usually guaranteed a hit OR forces overspend → rocket cycle</li><li>Hogexy at bridge sometimes works as prediction, but defend+rocket is more consistent</li></ul>
-        </div>
-      </div>
-    </div>
-  
-    <div class="matchup">
-      <div class="matchup-header" onclick="toggle(this)">
-        <div class="num">14</div>
-        <div class="title-block">
-          <div class="matchup-title">3M Pump <span class="badge hard">Hard</span></div>
-          <div class="matchup-short">Rocket FIRST pump only (none if Monk) • NATO+Rocket stacked Musks</div>
-        </div>
-        <div class="arrow">▼</div>
-      </div>
-      <div class="content">
-        <div class="content-inner">
-          <h4>Full Notes</h4>
-          <ul><li>Difficult matchup vs good 3M players</li><li><strong>Rocket the FIRST pump only</strong> (none if they run Monk)</li><li>Hero Goblins block E-Barbs + Mini Pekkas — keeps Hog alive</li><li>Get King Tower</li><li>Musks stacked one lane + not down elixir → <strong>NATO + Rocket all</strong></li><li><em>Don't play random Valk at bridge</em> — baits free pump</li><li>Exi must line up on troops IN FRONT of Musks AND the Musks</li><li>Pump down middle → Hog down middle to kill it fast</li><li>Predict Heal Spirit with Log (E-Barbs healing up kills Valk)</li><li>When opponent spends all elixir → Hog gets guaranteed hit</li></ul>
-        </div>
-      </div>
-    </div>
-  
-    <div class="matchup">
-      <div class="matchup-header" onclick="toggle(this)">
-        <div class="num">15</div>
-        <div class="title-block">
-          <div class="matchup-title">LavaLoon <span class="badge med">Medium</span></div>
-          <div class="matchup-short">Save rocket for Balloon • Don't Exi until Lava Hound drops</div>
-        </div>
-        <div class="arrow">▼</div>
-      </div>
-      <div class="content">
-        <div class="content-inner">
-          <h4>Full Notes</h4>
-          <ul><li>Standard decent matchup (slight harder with Mega Minion)</li><li>Play a card BEFORE Exi (Ice Spirit or Goblins) to protect it</li><li>Early bridge Balloons: rocket; if no rocket, Tornado to King</li><li><strong>Hog anytime — they can't punish</strong></li><li>Whichever lane they play primary ground troop → Valk same lane</li><li><em>Don't play Exi until they play Lava Hound</em></li><li>Give Lava Hound a second before placing Exi (don't let it walk up)</li><li><strong>Save Rocket for Balloon</strong></li><li>Ice Spirit resets Evo Inferno Dragon</li><li>On every counter push, support Exi (Valk in front)</li><li>Log Tombstone so Hog goes straight to tower</li></ul>
-        </div>
-      </div>
-    </div>
-  
-    <div class="matchup">
-      <div class="matchup-header" onclick="toggle(this)">
-        <div class="num">16</div>
-        <div class="title-block">
-          <div class="matchup-title">Mirror Match (Hog Exe) <span class="badge med">Medium</span></div>
-          <div class="matchup-short">Don't be first to play Valk/Exi • Exi BEHIND Hog (harder to react)</div>
-        </div>
-        <div class="arrow">▼</div>
-      </div>
-      <div class="content">
-        <div class="content-inner">
-          <h4>Full Notes</h4>
-          <ul><li>Goblins + Ice Spirit OR Goblins + Log = full counter to their Hog</li><li><strong>Don't be first to play Valk or Exi</strong> — wait and react</li><li>Don't tornado too many Hogs to King — King HP matters late</li><li>Late game: NATO Hog to King + Ice Spirit so only one tower hit</li><li>Vs Evo Valk: Hog → Exi BEHIND Hog → their Evo Valk pulls Hog+Exi into their tower → line up Exi on their Valk</li><li><strong>Put Exi behind Hog, not in front</strong> (harder to react to)</li><li><em>Play troop BEFORE rocket</em> — forces them to defend AND rocket back</li><li>Don't go Valk + Exi together — they stack on your push</li></ul>
-        </div>
-      </div>
-    </div>
-  
-    <div class="matchup">
-      <div class="matchup-header" onclick="toggle(this)">
-        <div class="num">17</div>
-        <div class="title-block">
-          <div class="matchup-title">Graveyard Freeze <span class="badge med">Medium</span></div>
-          <div class="matchup-short">King Tower early = easy game • Rocket after every defense</div>
-        </div>
-        <div class="arrow">▼</div>
-      </div>
-      <div class="content">
-        <div class="content-inner">
-          <h4>Full Notes</h4>
-          <ul><li><strong>King Tower early = easy game</strong></li><li>Play passive in single until King Tower opportunity</li><li>Right Exi placement makes opponent miss Tornado (Bowler pushes Exi back)</li><li>Rocket vs going Exi if they likely have Freeze ready</li><li>NATO Valk + Exi same lane = clogs lane, easier Graveyard defense</li><li>Hog opposite lane forces Tornado (easier) OR forces Evo Exi (rocket it)</li><li>With King Tower → Graveyard defense becomes easy</li><li><strong>Rocket after every Graveyard defense</strong> when not down elixir</li><li>Cycle logs → eventually puts you in rocket range</li></ul>
-        </div>
-      </div>
-    </div>
-  
-    <div class="matchup">
-      <div class="matchup-header" onclick="toggle(this)">
-        <div class="num">18</div>
-        <div class="title-block">
-          <div class="matchup-title">Graveyard Poison <span class="badge med">Medium</span></div>
-          <div class="matchup-short">KING TOWER IS EVERYTHING • Hog mid kites Valk → tower locks Graveyard</div>
-        </div>
-        <div class="arrow">▼</div>
-      </div>
-      <div class="content">
-        <div class="content-inner">
-          <h4>Full Notes</h4>
-          <ul><li><em>Most important Graveyard variant to get King Tower — almost guarantees the win</em></li><li><strong>NATO Fire Spirit tech to activate King early</strong></li><li>Valk Graveyard → <strong>Hog down middle kites Valk back</strong> → tower + King lock on Graveyard</li><li>Even with Evo Furnace, you can still rocket (King Tower defends both)</li><li>Without King Tower: less aggressive with rockets</li><li>NATO their Valk behind river when Graveyard is in their hand</li><li>Rocket tower after every defense (even if you hit nothing else)</li><li>Random Valk Graveyard at bridge → Hog kites Valk → they can't Poison + defend Hog</li><li>Keep Exi out of Furnace fire spirit range</li><li>NATO Evo Furnace to opposite lane + Rocket</li></ul>
-        </div>
-      </div>
-    </div>
-  
-    <div class="matchup">
-      <div class="matchup-header" onclick="toggle(this)">
-        <div class="num">19</div>
-        <div class="title-block">
-          <div class="matchup-title">Drill Poison (w/ Demolisher) <span class="badge hard">Hard</span></div>
-          <div class="matchup-short">NEED King Tower • Hog same time as Drill • Save Valk for Knight+Demo</div>
-        </div>
-        <div class="arrow">▼</div>
-      </div>
-      <div class="content">
-        <div class="content-inner">
-          <h4>Full Notes</h4>
-          <ul><li><strong>NEED King Tower — if you don't get it, you lose</strong></li><li>One Goblin stab for King is worth it</li><li>Save Valk for Knight + Demolisher</li><li>Knight + Demolisher + Drill push → Hog same time to kite Knight back</li><li><em>Hog when they Drill</em> = they can't Poison/Snowball instantly</li><li>Demolisher low enough → rocket it in double</li><li>Demolisher mid → Tornado + Rocket</li><li>Don't place Exi low enough for Poison</li><li>Log first Drill, Goblins second, NATO third to King if needed</li><li>One Exi throw + Log + tower shot = destroys a Drill</li><li>Evo Valk excellent vs Demolisher</li><li>After each Drill defense (not down elixir) → rocket tower</li></ul>
-        </div>
-      </div>
-    </div>
-  
-    <div class="matchup">
-      <div class="matchup-header" onclick="toggle(this)">
-        <div class="num">20</div>
-        <div class="title-block">
-          <div class="matchup-title">2.6 Hog <span class="badge med">Medium</span></div>
-          <div class="matchup-short">Keep Rocket for Ice Golem + Hog • Don't commit early on split pushes</div>
-        </div>
-        <div class="arrow">▼</div>
-      </div>
-      <div class="content">
-        <div class="content-inner">
-          <h4>Full Notes</h4>
-          <ul><li><em>Harder matchup post-heroes</em> — Ice Golem is what makes it tough</li><li>Keep Rocket for Ice Golem + Hog in single</li><li>Play passive — don't get caught taking damage</li><li>Tornado one card away: Hog alone isn't a threat (just Tornado to King)</li><li>Without Rocket/NATO: Goblins + Ice Spirit defends Hog</li><li>Ice Golem + Hog → Goblins+Ice Spirit kill Ice Golem → NATO Hog (sparingly — King HP matters)</li><li>Regular Exi is useless here — prioritize cycling to Evo</li><li><strong>Evo Valk is your best Hog counter</strong></li><li>Two split pushes → <em>don't commit to either side early</em></li><li>When they Ice Golem + Hog, you can rocket (they can't Ice Golem Hog again)</li><li>Triple: only rocket cycle if necessary</li></ul>
-        </div>
-      </div>
-    </div>
-  
-    <div class="matchup">
-      <div class="matchup-header" onclick="toggle(this)">
-        <div class="num">21</div>
-        <div class="title-block">
-          <div class="matchup-title">Classic Pekka BridgeSpam <span class="badge med">Medium</span></div>
-          <div class="matchup-short">Don't be aggressive in single • Get King Tower to win</div>
-        </div>
-        <div class="arrow">▼</div>
-      </div>
-      <div class="content">
-        <div class="content-inner">
-          <h4>Full Notes</h4>
-          <ul><li>Don't be aggressive in single — they build counter pushes off everything</li><li>Tornado Magic Archer into Valk when possible</li><li>Beware Hero Magic Archer ability</li><li>Don't Exi in back on weaker lane (Fireball range)</li><li><strong>Get King Tower — main win condition</strong></li><li><strong>Valk → Ghost/Bandit | Exi+Goblins → Pekka | Log/Ice → Ram</strong></li><li>NATO E-Wiz forward so Hog hits tower</li><li>Double: Pekka in back → rocket it (free trade)</li><li>Place Exi so it hits BOTH lanes (may need weird NATO)</li><li>Tornado everything into Exi double damage</li><li>Exi to reset Pekka (don't play too early)</li><li>Evo Ram: Evo Exi + Log | Magic Archer: Evo Valk pull</li></ul>
-        </div>
-      </div>
-    </div>
-  
-    <div class="matchup">
-      <div class="matchup-header" onclick="toggle(this)">
-        <div class="num">22</div>
-        <div class="title-block">
-          <div class="matchup-title">Drill Magic Archer Tornado <span class="badge hard">Hard</span></div>
-          <div class="matchup-short">One of the HARDEST matchups • Track Evo Drill cycle • Stack 2 Exis high</div>
-        </div>
-        <div class="arrow">▼</div>
-      </div>
-      <div class="content">
-        <div class="content-inner">
-          <h4>Full Notes</h4>
-          <ul><li><em>One of the hardest matchups in the game</em> (especially with Hero MA)</li><li>NATO + Drill in deck = confirmed Magic Archer → predict with Iceberg</li><li><strong>King Tower essential</strong></li><li>Rarely worth Hogging with counter-pushing troops (Bomb Tower + NATO counter Hog hard)</li><li><strong>Track Evo Drill cycle</strong> → Hog same time as Evo Drill</li><li>Rocket after almost every Drill defense (no MA on board, not down elixir)</li><li>Use Hog to block Magic Archer from getting tower lineup</li><li><em>Don't NATO on offense</em> — save it to stop MA hits</li><li><strong>Stack 2 Exis up high</strong> → Magic Archer can't lineup</li><li>Log + Exi throw + Goblins defends Drill stab-free (if Bomb Tower already played)</li><li>Play Valk very high vs Magic Archer</li></ul>
-        </div>
-      </div>
-    </div>
-  
-    <div class="matchup">
-      <div class="matchup-header" onclick="toggle(this)">
-        <div class="num">23</div>
-        <div class="title-block">
-          <div class="matchup-title">3.0 Xbow <span class="badge hard">Hard</span></div>
-          <div class="matchup-short">Every HP matters • Valk tank + Hog vs middle Xbow • Cycle Log constantly</div>
-        </div>
-        <div class="arrow">▼</div>
-      </div>
-      <div class="content">
-        <div class="content-inner">
-          <h4>Full Notes</h4>
-          <ul><li><em>Every bit of damage matters</em></li><li>Evo Archers/Evo Tesla → consider rocketing Xbow (lock prevention)</li><li>Watch for last-second Log on 1HP troop for tiny lock</li><li>Single elixir Fireball on tower: not worth rocketing back yet</li><li><strong>Xbow down middle: Valk tank + Hog across river</strong> — too fast to catch</li><li>Abuse Hero Goblins ability — forces multi-elixir responses</li><li>Xbow alone → predict Fireball on Exi → place Valk preemptively</li><li>Hog mid for Xbow → forces Evo Tesla defense</li><li><strong>Keep cycling Log on tower</strong> — clip archers when you can</li><li>Hold NATO → if Xbow + Knight, split Goblins + Rocket</li><li>Valk at bridge + Exi splashes Knight onto Xbow = wins games</li></ul>
-        </div>
-      </div>
-    </div>
-  
-    <div class="matchup">
-      <div class="matchup-header" onclick="toggle(this)">
-        <div class="num">24</div>
-        <div class="title-block">
-          <div class="matchup-title">Recruits Fireball Bait <span class="badge easy">Easy</span></div>
-          <div class="matchup-short">Flying Machine = #1 threat • Hog same time as Pigs bridge</div>
-        </div>
-        <div class="arrow">▼</div>
-      </div>
-      <div class="content">
-        <div class="content-inner">
-          <h4>Full Notes</h4>
-          <ul><li><strong>Good matchup</strong> for Hog Exe</li><li><em>Flying Machine is the #1 threat</em> — don't let it sit at river out of tower range</li><li>Save Exi same lane as Flying Machine, OR play Exi center + Tornado FM in</li><li>Don't overdefend in single — they'll Pigs you for free damage</li><li>Pigs bridge → <strong>Hog same time</strong> (they can't instantly Cage without taking a hit)</li><li>Only use Valk to protect Exi (even vs Evo Cage)</li><li>Tornado Flying Machine into Exi</li><li>Double: <em>don't NATO Flying Machine into Rocket</em> — only rocket if free</li><li>Valk + Log completely cleans one side</li><li>Hog on counter push with Tornado usually gets a hit</li><li>Log + NATO clips Zappies + Cage together</li></ul>
-        </div>
-      </div>
-    </div>
-  
-<div class="matchup" id="universal" style="border-left-color: var(--purple);">
-  <div class="matchup-header" onclick="toggle(this)">
-    <div class="num" style="color: var(--purple)">★</div>
-    <div class="title-block">
-      <div class="matchup-title" style="color: var(--purple)">Universal Tips</div>
-      <div class="matchup-short">King Tower • Hero Goblins ability • Hog with counter push</div>
-    </div>
-    <div class="arrow">▼</div>
-  </div>
-  <div class="content">
-    <div class="content-inner">
-      <h4>Always Remember</h4>
-      <ul>
-        <li><strong>Get King Tower in almost every matchup</strong></li>
-        <li>Hero Goblins ability is <em>broken</em> — abuse it constantly</li>
-        <li>Counter-pushing Exi/Valk → always Hog with it</li>
-        <li>Hover NATO/Rocket on counter pushes for value snipes</li>
-        <li>Play troop BEFORE rocket — forces opponent to defend AND rocket back</li>
-        <li>Don't stack Valk + Exi close together (lightning bait)</li>
-      </ul>
-    </div>
-  </div>
-</div></div>
+  <div id="matchups"></div>
+
+  <div id="player-deck-bottom" class="player-deck-bar"></div>
 
   <footer>
-    <p>Based on Iso1_cr's matchup guide • Tap any card to reveal full notes</p>
+    <p>Based on Iso1_cr's matchup guide •
+      <a href="https://www.youtube.com/watch?v=13_rx0x-rk0&amp;list=PLx_HedVtjNZd6L6w2fvAeFVi1EKn3Ks6Q&amp;index=4" target="_blank" rel="noopener">Watch the source video ↗</a>
+    </p>
+    <p style="margin-top:6px;">Tap any matchup to expand • Click any card icon to filter • Single result auto-opens</p>
   </footer>
 </div>
 
-<script>
-const matchups = [
-  {
-    title: "Giant Graveyard",
-    difficulty: "hard",
-    short: "Tornado splash to King • Hog opposite lane • Save Valk for Giant/Mini Pekka",
-    notes: [
-      "Tornado their splash unit (Mini Pekka, etc.) to King Tower early",
-      "<strong>King Tower active = leaking is fine</strong>",
-      "Hog down the middle vs Bowler/Executioner to protect Exi",
-      "Save Valk for Giant and Mini Pekka",
-      "Use Goblins to DPS Giant + block Graveyard skeletons",
-      "Play Hog <em>opposite lane</em> to prevent Bowler + Giant stack",
-      "Hover rocket on counter pushes for Bowler/Mini Pekka/Musk value",
-      "Cycle Bowler mid = free rocket value",
-      "When counter pushing Valk + Hog, hover NATO to pull Musk/Bowler"
-    ]
-  },
-  {
-    title: "Mortar Lightning",
-    difficulty: "hard",
-    short: "Don't get caught down elixir • Rocket stacked Cannon Cart + Mortar",
-    notes: [
-      "<em>Never get caught down elixir</em>",
-      "Outside mortar, their defense is weak — abuse no-mortar moments",
-      "NATO Ghost to King ASAP to activate it",
-      "If Cannon Cart + Mortar stacked → <strong>rocket both</strong>",
-      "Never stack Valk + Exi close (double lightning bait)",
-      "Only Hog + Exi at river if they have <em>no Cannon Cart in hand</em>",
-      "Vs Evo Mortar w/o rocket: split Goblins mid + Hog across to DPS",
-      "When up damage, play passive not aggressive",
-      "Save Evo Valk for Goblinstein counter push"
-    ]
-  },
-  {
-    title: "E-Giant Lightning",
-    difficulty: "hard",
-    short: "One of the WORST matchups • Survive single, rocket cycle in triple",
-    notes: [
-      "<em>One of the worst matchups alongside Icebow</em>",
-      "Goal: survive single → rocket cycle in triple",
-      "Kite Inferno + Baby Dragon to opposite lane (Goblins/Ice Spirit)",
-      "<strong>Priority: cycle to Evo Valk</strong>",
-      "If Egiant has solo card in a lane → put Hog/Valk opposite",
-      "Hog same time as E-Giant to prevent lightning combo",
-      "Hero Goblins: destroy Cages, tank Golden Knight, counter Inferno",
-      "Use Bowler to push Valk out of lightning range",
-      "Two Exis high = bridge control, forces wasted lightning"
-    ]
-  },
-  {
-    title: "Royal Giant",
-    difficulty: "med",
-    short: "Don't Hog without NATO • Valk same lane • Evo Exi shreds RG",
-    notes: [
-      "Don't Hog without NATO/counter-push cards in single",
-      "Leak and save Valk for RG",
-      "RG in back → <strong>Valk same lane</strong>",
-      "Exi to DPS RG, Goblins to block Fisherman",
-      "Better to defend RG cleanly than force a bad counter push",
-      "Hover NATO — tornado Fisherman away before it pulls Hog to King",
-      "<strong>Evo Exi double damage shreds RG</strong>",
-      "Play passive, wait for one chance to NATO Fisherman opposite lane"
-    ]
-  },
-  {
-    title: "Golem Lightning",
-    difficulty: "hard",
-    short: "Aggressive Hogs in single • Hover Exi high • Every HP matters",
-    notes: [
-      "Be aggressive with Hogs in single — don't let early damage lead",
-      "Block Baby Dragon + Ice Wiz from hitting Exi (prevents lightning kill)",
-      "Don't place Valk in back — Baby Dragon splashes tower 3-4×",
-      "Hog opposite lane from Brawler so you can NATO Brawler to King",
-      "<strong>Hover Exi high</strong> to snipe supports + force lightning away",
-      "NATO Golem back to reduce damage",
-      "<em>Every HP matters for rocket/lightning cycle</em>",
-      "Evo Valk + Evo Exi defend without extra elixir",
-      "After they lightning, immediately pressure with Hog + Goblins"
-    ]
-  },
-  {
-    title: "Balloon Freeze",
-    difficulty: "med",
-    short: "ALWAYS rocket Balloon • Hog freely • Learn tornado-to-king tech",
-    notes: [
-      "<strong>60/40 in Hog Exe's favor</strong> (harder post-Exi nerf)",
-      "<em>ALWAYS rocket the Balloon — push it BACK, not toward your tower</em>",
-      "Hog freely — they can't punish it",
-      "Hero Goblins strong (their only small spell is Barb Barrel)",
-      "Pop Goblin ability to block Tornado or pull Dragon back",
-      "If caught w/o rocket: Tornado Balloon to King (learn placement)",
-      "Counter-pushing Exi → always Hog with it to force NATO",
-      "Don't play Evo Valk in back — bridge Balloon pulls Valk to tower",
-      "Ice Spirit + NATO mid-map Balloon → free King activation",
-      "If they Freeze on defense, their next Balloon push is toothless"
-    ]
-  },
-  {
-    title: "Giant Double Prince",
-    difficulty: "med",
-    short: "Don't Hog if Prince in hand • Valk in front of King vs Dark Prince",
-    notes: [
-      "Don't Hog in single if Prince might be in hand",
-      "<strong>Valk → Dark Prince | Goblins → Prince | Exi → Giant + Mega Minion</strong>",
-      "Hero Goblins ability often enough vs Prince — pop with Ice Spirit",
-      "Dark Prince from back → <em>play Valk in front of King</em> (no splash)",
-      "Play Exi out of range of Giant's swing",
-      "Evo Exi cleans Giant + Prince with double damage",
-      "In double: safer to Hog counter-push with Exi + Evo Valk",
-      "Save Evo Valk for Giant push; use Exi + Goblins for Dark Prince",
-      "Play Evo Valk FAR from Giant so Giant punches a Goblin"
-    ]
-  },
-  {
-    title: "Giant Skull BridgeSpam",
-    difficulty: "med",
-    short: "Tornado Ghost to King • Exi (not Valk) into Giant Skelly",
-    notes: [
-      "Play cautious in single — don't Hog with counter-push Exi early",
-      "<strong>Tornado Ghost to King immediately</strong>",
-      "Prefer <em>Exi over Valk</em> for Giant Skelly",
-      "Save Valk for Dark Prince, Ghost, Ram",
-      "Use Goblins to pull everything into Exi",
-      "Ram → <strong>Goblins LOW</strong> (in case of Wizard/Mother Witch)",
-      "NATO Mother Witch/Wizard to opposite lane",
-      "Evo Valk pulls Mother Witch to opposite lane",
-      "Vs Evo Ghost: always have Valk ready (no Goblins risk)"
-    ]
-  },
-  {
-    title: "Miner Balloon (2.9)",
-    difficulty: "hard",
-    short: "ZERO Balloon hits all game • Hog same time as Miner Balloon",
-    notes: [
-      "<em>Super tough — play near-perfectly</em>",
-      "<strong>Take ZERO Balloon hits the entire 5 minutes</strong>",
-      "Hog same time as Miner Balloon — they can't defend both",
-      "Always keep Rocket + Goblins in hand when they have Miner + Balloon",
-      "Don't Exi into Musk if it leaves you w/o rocket/goblins",
-      "Goblins on Miner = tower + gobs DPS Miner before Balloon hits",
-      "Cycle Exi when they have no Balloon in hand",
-      "Block for Exi using Valk + Ice Spirit",
-      "Don't Hog vs Bomb Tower — wait until they go Miner Balloon",
-      "<strong>Track Evo Musketeer cycle</strong> — getting caught off guard is costly"
-    ]
-  },
-  {
-    title: "Archer Queen Pigs (2.9)",
-    difficulty: "easy",
-    short: "Play passive in single • Defend Pigs → rocket tower • Rarely Hog",
-    notes: [
-      "<strong>Good matchup</strong> — play passive in single to avoid Pigs damage",
-      "Rarely worth Hogging",
-      "Loop: defend Pigs → rocket tower",
-      "King activation: Goblins one side + NATO other Pigs to King",
-      "Valk + Hog if they're down elixir (Valk one-shots Ice Spirit)",
-      "Don't rocket Queen until triple",
-      "If Queen counter-pushes with split Pigs → Exi in Queen lane splashes both",
-      "No Rocket for Pigs? Ice Spirit Exi or NATO Exi works",
-      "Don't overcommit — one bad play loses both towers"
-    ]
-  },
-  {
-    title: "Hog Lightning",
-    difficulty: "med",
-    short: "Ice Spirit/Log resets Mighty Miner • Don't over-rocket in triple",
-    notes: [
-      "Get cycle right for double + triple; don't take Hog damage to King",
-      "Evo Furnace annoying — save Valk+Log or Exi+Log to clear it",
-      "<strong>Ice Spirit/Log resets Mighty Miner charge</strong> (saves Valk)",
-      "Don't over-rocket in triple — lose lightning cycle",
-      "Exi same lane as Furnace OK in single (play early, before fire spirits)",
-      "Don't stack Valk + Exi (easy lightning)",
-      "Abuse Hero Goblins ability — free damage on range troops",
-      "When you Exi a Hog → <em>always Hog yourself</em> to block lightning",
-      "Force Mighty Miner to switch lanes = reduces his threat",
-      "Don't be scared to NATO offense if you have Evo Exi/Valk for defense"
-    ]
-  },
-  {
-    title: "Recruits Spam",
-    difficulty: "hard",
-    short: "DON'T LOSE IN SINGLE • Mighty Miner WILL swap • Hover Exi",
-    notes: [
-      "<em>DON'T LOSE IN SINGLE — that's the entire key</em>",
-      "Valk/Exi one lane → opponent <strong>almost always</strong> swaps with Mighty Miner",
-      "Keep Ice Spirit to reset Mighty Miner",
-      "Keep Exi + Valk healthy — DPS'd troops can't defend anything",
-      "OK to let small damage through (Minions/Wall Breakers) if hand is bad",
-      "<strong>King Tower essential</strong> — use Wall Breakers to activate",
-      "<strong>Hover Exi rather than placing</strong> — wait for lane swap",
-      "Tornado Minions into Exi (no other good response)",
-      "Out of single: matchup is almost free"
-    ]
-  },
-  {
-    title: "Hyperbait",
-    difficulty: "easy",
-    short: "Free matchup • Hog into Bush + Log • Save Exi for Skeleton Barrel",
-    notes: [
-      "<strong>Pretty free in current meta</strong> (Rocket version harder than Fireball)",
-      "Bush = confirmed Hyperbait → Hog into it + Log = multi-card value",
-      "Get King Tower — huge vs spam",
-      "<strong>Save Exi for Skeleton Barrel + Rascals</strong> (best counter)",
-      "Valk → Ghost / counter pushes",
-      "Log → Goblins, Bush, Dark Goblin",
-      "Don't overcommit in single",
-      "Tornado Dark Goblin into Valk (otherwise impossible to log)",
-      "Hog usually guaranteed a hit OR forces overspend → rocket cycle",
-      "Hogexy at bridge sometimes works as prediction, but defend+rocket is more consistent"
-    ]
-  },
-  {
-    title: "3M Pump",
-    difficulty: "hard",
-    short: "Rocket FIRST pump only (none if Monk) • NATO+Rocket stacked Musks",
-    notes: [
-      "Difficult matchup vs good 3M players",
-      "<strong>Rocket the FIRST pump only</strong> (none if they run Monk)",
-      "Hero Goblins block E-Barbs + Mini Pekkas — keeps Hog alive",
-      "Get King Tower",
-      "Musks stacked one lane + not down elixir → <strong>NATO + Rocket all</strong>",
-      "<em>Don't play random Valk at bridge</em> — baits free pump",
-      "Exi must line up on troops IN FRONT of Musks AND the Musks",
-      "Pump down middle → Hog down middle to kill it fast",
-      "Predict Heal Spirit with Log (E-Barbs healing up kills Valk)",
-      "When opponent spends all elixir → Hog gets guaranteed hit"
-    ]
-  },
-  {
-    title: "LavaLoon",
-    difficulty: "med",
-    short: "Save rocket for Balloon • Don't Exi until Lava Hound drops",
-    notes: [
-      "Standard decent matchup (slight harder with Mega Minion)",
-      "Play a card BEFORE Exi (Ice Spirit or Goblins) to protect it",
-      "Early bridge Balloons: rocket; if no rocket, Tornado to King",
-      "<strong>Hog anytime — they can't punish</strong>",
-      "Whichever lane they play primary ground troop → Valk same lane",
-      "<em>Don't play Exi until they play Lava Hound</em>",
-      "Give Lava Hound a second before placing Exi (don't let it walk up)",
-      "<strong>Save Rocket for Balloon</strong>",
-      "Ice Spirit resets Evo Inferno Dragon",
-      "On every counter push, support Exi (Valk in front)",
-      "Log Tombstone so Hog goes straight to tower"
-    ]
-  },
-  {
-    title: "Mirror Match (Hog Exe)",
-    difficulty: "med",
-    short: "Don't be first to play Valk/Exi • Exi BEHIND Hog (harder to react)",
-    notes: [
-      "Goblins + Ice Spirit OR Goblins + Log = full counter to their Hog",
-      "<strong>Don't be first to play Valk or Exi</strong> — wait and react",
-      "Don't tornado too many Hogs to King — King HP matters late",
-      "Late game: NATO Hog to King + Ice Spirit so only one tower hit",
-      "Vs Evo Valk: Hog → Exi BEHIND Hog → their Evo Valk pulls Hog+Exi into their tower → line up Exi on their Valk",
-      "<strong>Put Exi behind Hog, not in front</strong> (harder to react to)",
-      "<em>Play troop BEFORE rocket</em> — forces them to defend AND rocket back",
-      "Don't go Valk + Exi together — they stack on your push"
-    ]
-  },
-  {
-    title: "Graveyard Freeze",
-    difficulty: "med",
-    short: "King Tower early = easy game • Rocket after every defense",
-    notes: [
-      "<strong>King Tower early = easy game</strong>",
-      "Play passive in single until King Tower opportunity",
-      "Right Exi placement makes opponent miss Tornado (Bowler pushes Exi back)",
-      "Rocket vs going Exi if they likely have Freeze ready",
-      "NATO Valk + Exi same lane = clogs lane, easier Graveyard defense",
-      "Hog opposite lane forces Tornado (easier) OR forces Evo Exi (rocket it)",
-      "With King Tower → Graveyard defense becomes easy",
-      "<strong>Rocket after every Graveyard defense</strong> when not down elixir",
-      "Cycle logs → eventually puts you in rocket range"
-    ]
-  },
-  {
-    title: "Graveyard Poison",
-    difficulty: "med",
-    short: "KING TOWER IS EVERYTHING • Hog mid kites Valk → tower locks Graveyard",
-    notes: [
-      "<em>Most important Graveyard variant to get King Tower — almost guarantees the win</em>",
-      "<strong>NATO Fire Spirit tech to activate King early</strong>",
-      "Valk Graveyard → <strong>Hog down middle kites Valk back</strong> → tower + King lock on Graveyard",
-      "Even with Evo Furnace, you can still rocket (King Tower defends both)",
-      "Without King Tower: less aggressive with rockets",
-      "NATO their Valk behind river when Graveyard is in their hand",
-      "Rocket tower after every defense (even if you hit nothing else)",
-      "Random Valk Graveyard at bridge → Hog kites Valk → they can't Poison + defend Hog",
-      "Keep Exi out of Furnace fire spirit range",
-      "NATO Evo Furnace to opposite lane + Rocket"
-    ]
-  },
-  {
-    title: "Drill Poison (w/ Demolisher)",
-    difficulty: "hard",
-    short: "NEED King Tower • Hog same time as Drill • Save Valk for Knight+Demo",
-    notes: [
-      "<strong>NEED King Tower — if you don't get it, you lose</strong>",
-      "One Goblin stab for King is worth it",
-      "Save Valk for Knight + Demolisher",
-      "Knight + Demolisher + Drill push → Hog same time to kite Knight back",
-      "<em>Hog when they Drill</em> = they can't Poison/Snowball instantly",
-      "Demolisher low enough → rocket it in double",
-      "Demolisher mid → Tornado + Rocket",
-      "Don't place Exi low enough for Poison",
-      "Log first Drill, Goblins second, NATO third to King if needed",
-      "One Exi throw + Log + tower shot = destroys a Drill",
-      "Evo Valk excellent vs Demolisher",
-      "After each Drill defense (not down elixir) → rocket tower"
-    ]
-  },
-  {
-    title: "2.6 Hog",
-    difficulty: "med",
-    short: "Keep Rocket for Ice Golem + Hog • Don't commit early on split pushes",
-    notes: [
-      "<em>Harder matchup post-heroes</em> — Ice Golem is what makes it tough",
-      "Keep Rocket for Ice Golem + Hog in single",
-      "Play passive — don't get caught taking damage",
-      "Tornado one card away: Hog alone isn't a threat (just Tornado to King)",
-      "Without Rocket/NATO: Goblins + Ice Spirit defends Hog",
-      "Ice Golem + Hog → Goblins+Ice Spirit kill Ice Golem → NATO Hog (sparingly — King HP matters)",
-      "Regular Exi is useless here — prioritize cycling to Evo",
-      "<strong>Evo Valk is your best Hog counter</strong>",
-      "Two split pushes → <em>don't commit to either side early</em>",
-      "When they Ice Golem + Hog, you can rocket (they can't Ice Golem Hog again)",
-      "Triple: only rocket cycle if necessary"
-    ]
-  },
-  {
-    title: "Classic Pekka BridgeSpam",
-    difficulty: "med",
-    short: "Don't be aggressive in single • Get King Tower to win",
-    notes: [
-      "Don't be aggressive in single — they build counter pushes off everything",
-      "Tornado Magic Archer into Valk when possible",
-      "Beware Hero Magic Archer ability",
-      "Don't Exi in back on weaker lane (Fireball range)",
-      "<strong>Get King Tower — main win condition</strong>",
-      "<strong>Valk → Ghost/Bandit | Exi+Goblins → Pekka | Log/Ice → Ram</strong>",
-      "NATO E-Wiz forward so Hog hits tower",
-      "Double: Pekka in back → rocket it (free trade)",
-      "Place Exi so it hits BOTH lanes (may need weird NATO)",
-      "Tornado everything into Exi double damage",
-      "Exi to reset Pekka (don't play too early)",
-      "Evo Ram: Evo Exi + Log | Magic Archer: Evo Valk pull"
-    ]
-  },
-  {
-    title: "Drill Magic Archer Tornado",
-    difficulty: "hard",
-    short: "One of the HARDEST matchups • Track Evo Drill cycle • Stack 2 Exis high",
-    notes: [
-      "<em>One of the hardest matchups in the game</em> (especially with Hero MA)",
-      "NATO + Drill in deck = confirmed Magic Archer → predict with Iceberg",
-      "<strong>King Tower essential</strong>",
-      "Rarely worth Hogging with counter-pushing troops (Bomb Tower + NATO counter Hog hard)",
-      "<strong>Track Evo Drill cycle</strong> → Hog same time as Evo Drill",
-      "Rocket after almost every Drill defense (no MA on board, not down elixir)",
-      "Use Hog to block Magic Archer from getting tower lineup",
-      "<em>Don't NATO on offense</em> — save it to stop MA hits",
-      "<strong>Stack 2 Exis up high</strong> → Magic Archer can't lineup",
-      "Log + Exi throw + Goblins defends Drill stab-free (if Bomb Tower already played)",
-      "Play Valk very high vs Magic Archer"
-    ]
-  },
-  {
-    title: "3.0 Xbow",
-    difficulty: "hard",
-    short: "Every HP matters • Valk tank + Hog vs middle Xbow • Cycle Log constantly",
-    notes: [
-      "<em>Every bit of damage matters</em>",
-      "Evo Archers/Evo Tesla → consider rocketing Xbow (lock prevention)",
-      "Watch for last-second Log on 1HP troop for tiny lock",
-      "Single elixir Fireball on tower: not worth rocketing back yet",
-      "<strong>Xbow down middle: Valk tank + Hog across river</strong> — too fast to catch",
-      "Abuse Hero Goblins ability — forces multi-elixir responses",
-      "Xbow alone → predict Fireball on Exi → place Valk preemptively",
-      "Hog mid for Xbow → forces Evo Tesla defense",
-      "<strong>Keep cycling Log on tower</strong> — clip archers when you can",
-      "Hold NATO → if Xbow + Knight, split Goblins + Rocket",
-      "Valk at bridge + Exi splashes Knight onto Xbow = wins games"
-    ]
-  },
-  {
-    title: "Recruits Fireball Bait",
-    difficulty: "easy",
-    short: "Flying Machine = #1 threat • Hog same time as Pigs bridge",
-    notes: [
-      "<strong>Good matchup</strong> for Hog Exe",
-      "<em>Flying Machine is the #1 threat</em> — don't let it sit at river out of tower range",
-      "Save Exi same lane as Flying Machine, OR play Exi center + Tornado FM in",
-      "Don't overdefend in single — they'll Pigs you for free damage",
-      "Pigs bridge → <strong>Hog same time</strong> (they can't instantly Cage without taking a hit)",
-      "Only use Valk to protect Exi (even vs Evo Cage)",
-      "Tornado Flying Machine into Exi",
-      "Double: <em>don't NATO Flying Machine into Rocket</em> — only rocket if free",
-      "Valk + Log completely cleans one side",
-      "Hog on counter push with Tornado usually gets a hit",
-      "Log + NATO clips Zappies + Cage together"
-    ]
-  }
-];
-
-const universalTips = `
-<div class="matchup" id="universal" style="border-left-color: var(--purple);">
-  <div class="matchup-header" onclick="toggle(this)">
-    <div class="num" style="color: var(--purple)">★</div>
-    <div class="title-block">
-      <div class="matchup-title" style="color: var(--purple)">Universal Tips</div>
-      <div class="matchup-short">King Tower • Hero Goblins ability • Hog with counter push</div>
-    </div>
-    <div class="arrow">▼</div>
-  </div>
-  <div class="content">
-    <div class="content-inner">
-      <h4>Always Remember</h4>
-      <ul>
-        <li><strong>Get King Tower in almost every matchup</strong></li>
-        <li>Hero Goblins ability is <em>broken</em> — abuse it constantly</li>
-        <li>Counter-pushing Exi/Valk → always Hog with it</li>
-        <li>Hover NATO/Rocket on counter pushes for value snipes</li>
-        <li>Play troop BEFORE rocket — forces opponent to defend AND rocket back</li>
-        <li>Don't stack Valk + Exi close together (lightning bait)</li>
-      </ul>
-    </div>
-  </div>
-</div>`;
-
-function render() {
-  const container = document.getElementById('matchups');
-  container.innerHTML = matchups.map((m, i) => `
-    <div class="matchup">
-      <div class="matchup-header" onclick="toggle(this)">
-        <div class="num">${String(i + 1).padStart(2, '0')}</div>
-        <div class="title-block">
-          <div class="matchup-title">${m.title} <span class="badge ${m.difficulty}">${m.difficulty === 'hard' ? 'Hard' : m.difficulty === 'med' ? 'Medium' : 'Easy'}</span></div>
-          <div class="matchup-short">${m.short}</div>
-        </div>
-        <div class="arrow">▼</div>
-      </div>
-      <div class="content">
-        <div class="content-inner">
-          <h4>Full Notes</h4>
-          <ul>${m.notes.map(n => `<li>${n}</li>`).join('')}</ul>
-        </div>
-      </div>
-    </div>
-  `).join('') + universalTips;
-}
-
-function toggle(el) {
-  el.parentElement.classList.toggle('open');
-}
-
-function expandAll() {
-  document.querySelectorAll('.matchup').forEach(m => m.classList.add('open'));
-}
-
-function collapseAll() {
-  document.querySelectorAll('.matchup').forEach(m => m.classList.remove('open'));
-}
-
-render();
-</script>
-
-
+<script src="./extra/codex.js"></script>
 </body></html>

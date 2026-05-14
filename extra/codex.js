@@ -15,7 +15,48 @@
 
 const CARD_BASE = 'https://cdn.royaleapi.com/static/img/cards-150';
 
-const SOURCE_VIDEO = 'https://www.youtube.com/watch?v=13_rx0x-rk0&list=PLx_HedVtjNZd6L6w2fvAeFVi1EKn3Ks6Q&index=4';
+const SOURCE_VIDEO = 'https://www.youtube.com/watch?v=13_rx0x-rk0&list=PLx_HedVtjNZd6L6w2fvAeFVi1EKn3Ks6Q&index=5';
+
+// Per-matchup deep-link timestamps into the source video (seconds).
+// Indexed by matchup position. Position 0 = matchup #01, etc.
+const TIMESTAMPS = [
+  17,    // 01 Giant Graveyard         00:17
+  247,   // 02 Mortar Lightning        04:07
+  548,   // 03 E-Giant Lightning       09:08
+  851,   // 04 Royal Giant             14:11
+  1026,  // 05 Golem Lightning         17:06
+  1326,  // 06 Balloon Freeze          22:06
+  1628,  // 07 Giant Double Prince     27:08
+  1875,  // 08 Giant Skull BridgeSpam  31:15
+  2078,  // 09 Miner Balloon           34:38
+  2367,  // 10 Archer Queen Pigs       39:27
+  2620,  // 11 Hog Lightning           43:40
+  2850,  // 12 Recruits Spam           47:30
+  3087,  // 13 Hyperbait               51:27
+  3279,  // 14 3M Pump                 54:39
+  3546,  // 15 LavaLoon                59:06
+  3805,  // 16 Mirror Match            1:03:25
+  4063,  // 17 Graveyard Freeze        1:07:43
+  4286,  // 18 Graveyard Poison        1:11:26
+  4485,  // 19 Drill Poison            1:14:45
+  4779,  // 20 2.6 Hog                 1:19:39
+  5078,  // 21 Classic Pekka BridgeSpam 1:24:38
+  5369,  // 22 Drill Magic Archer Tornado 1:29:29
+  5669,  // 23 3.0 Xbow                1:34:29
+  5929   // 24 Recruits Fireball Bait  1:38:49
+];
+
+function formatTimestamp(s) {
+  const h = Math.floor(s / 3600);
+  const m = Math.floor((s % 3600) / 60);
+  const sec = s % 60;
+  const pad = (n) => String(n).padStart(2, '0');
+  return h > 0 ? `${h}:${pad(m)}:${pad(sec)}` : `${m}:${pad(sec)}`;
+}
+
+function videoLink(seconds) {
+  return `${SOURCE_VIDEO}&t=${seconds}s`;
+}
 
 const SPELLS = new Set([
   'lightning','fireball','rocket','the-log','tornado','poison',
@@ -854,12 +895,17 @@ function render() {
   if (!list.length) {
     container.innerHTML = `<div class="empty-state">No matchups match the current filters.</div>` + universalTipsHTML;
   } else {
-    container.innerHTML = list.map(({ m, i }) => `
+    container.innerHTML = list.map(({ m, i }) => {
+      const t = TIMESTAMPS[i];
+      const tsLink = t != null
+        ? `<a class="yt-timestamp" href="${videoLink(t)}" target="_blank" rel="noopener" title="Open this matchup in the source video">▶ ${formatTimestamp(t)}</a>`
+        : '';
+      return `
       <div class="matchup ${autoOpen ? 'open' : ''}" data-difficulty="${m.difficulty}">
         <div class="matchup-header">
           <div class="num">${String(i + 1).padStart(2, '0')}</div>
           <div class="title-block">
-            <div class="matchup-title">${m.title} <span class="badge ${m.difficulty}">${difficultyLabel(m.difficulty)}</span></div>
+            <div class="matchup-title">${m.title} <span class="badge ${m.difficulty}">${difficultyLabel(m.difficulty)}</span>${tsLink}</div>
             ${m.main && m.main.length ? `<div class="main-cards">${m.main.map(s => cardChip(s, { mini: true })).join('')}</div>` : ''}
             <div class="matchup-short">${m.short}</div>
           </div>
@@ -869,7 +915,8 @@ function render() {
           ${renderMatchupContent(m)}
         </div>
       </div>
-    `).join('') + universalTipsHTML;
+    `;
+    }).join('') + universalTipsHTML;
   }
 
   renderActiveFilters();
@@ -910,6 +957,10 @@ function clearFilters() {
 
 function wireGlobalHandlers() {
   document.addEventListener('click', (e) => {
+    // Anchor clicks: let the browser handle navigation; don't toggle the
+    // matchup header that the link is nested inside.
+    if (e.target.closest('a')) return;
+
     const chip = e.target.closest('.card-chip');
     if (chip && chip.dataset.card) {
       toggleCardFilter(chip.dataset.card);

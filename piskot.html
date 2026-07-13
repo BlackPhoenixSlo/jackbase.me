@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Ferrero Rocher Recipe | Fitnes Ferrero Rocher Recept</title>
+    <style>
+        :root {
+            --bg-color: #faf8f5;
+            --text-main: #333;
+            --accent-dark: #4a3b32;
+            --accent-light: #8c6b5d;
+            --card-bg: #ffffff;
+            --border-color: #f0e6e1;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .title {
+            color: var(--accent-dark);
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: var(--accent-light);
+            font-size: 1.2em;
+            margin-top: 0;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .lang-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+        }
+
+        h2 {
+            color: var(--accent-dark);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        /* Shopping List Styles */
+        .shopping-list {
+            background: #fdfbf7;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .checklist-item:hover {
+            opacity: 0.8;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            margin-top: 6px;
+            margin-right: 12px;
+            min-width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: var(--accent-dark);
+        }
+
+        .checklist-item span {
+            font-size: 1.05em;
+        }
+
+        .checklist-item input[type="checkbox"]:checked + span {
+            text-decoration: line-through;
+            color: #888;
+        }
+
+        /* Instructions Styles */
+        .instruction-step {
+            margin-bottom: 20px;
+            padding-left: 15px;
+            border-left: 4px solid var(--accent-light);
+        }
+
+        .instruction-step strong {
+            display: block;
+            color: var(--accent-dark);
+            margin-bottom: 5px;
+            font-size: 1.1em;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-image {
+                height: 250px;
+            }
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="hero-section">
+            <img src="https://images.unsplash.com/photo-1548848221-0c2e497ed557?auto=format&fit=crop&w=1200&q=80" alt="Chocolate Truffles" class="hero-image">
+            <h1 class="title">Fitness Ferrero Rocher</h1>
+            <p class="subtitle">Gut-friendly, high-protein, zero cheap fillers. / Prijazno želodcu, visoka vsebnost beljakovin, brez cenenih polnil.</p>
+        </div>
+
+        <div class="content-grid">
+            
+            <div class="lang-card">
+                <h2>🇬🇧 English Recipe</h2>
+                
+                <div class="shopping-list">
+                    <h3>🛒 Store Purchase Checklist</h3>
+                    <p><em>Check items off as you shop!</em></p>
+                    
+                    <label class="checklist-item">
+                        <input type="checkbox">
+                        <span><strong>Roasted Hazelnuts:</strong> 1.5 cups (142g for base + whole nuts for center + garnish)</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox">
+                        <span><strong>Protein Powder:</strong> 1/2 cup (45g) clean whey isolate or plant blend (unflavored/chocolate)</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox">
+                        <span><strong>Rolled Oats:</strong> 1/2 cup (45g)</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox">
+                        <span><strong>Cocoa Powder:</strong> 1/4 cup (28g)</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox">
+                        <span><strong>Pure Maple Syrup:</strong> 1/4 cup (71g)</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox">
+                        <span><strong>Vanilla Extract:</strong> 2 teaspoons</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox">
+                        <span><strong>Sea Salt:</strong> 1/2 teaspoon</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox">
+                        <span><strong>Dark Chocolate:</strong> 1/2 cup (85g) - 70% cacao or higher</span>
+                    </label>
+                </div>
+
+                <div class="instructions">
+                    <h3>👨‍🍳 Instructions</h3>
+                    
+                    <div class="instruction-step">
+                        <strong>1. Process the Base</strong>
+                        Blend 1 cup of roasted hazelnuts in a food processor until they break down into a thick paste (2–3 mins).
+                    </div>
+                    <div class="instruction-step">
+                        <strong>2. Mix Dry & Wet</strong>
+                        Add oat flour (blended oats), protein powder, cocoa, sea salt, vanilla, and maple syrup to the processor. Pulse to form a dough. Add a splash of water if needed.
+                    </div>
+                    <div class="instruction-step">
+                        <strong>3. Form Truffles</strong>
+                        Flatten a spoonful of dough, place a whole hazelnut in the center, and roll into a smooth ball.
+                    </div>
+                    <div class="instruction-step">
+                        <strong>4. Freeze</strong>
+                        Place truffles in the freezer for 15–20 minutes to firm up before coating.
+                    </div>
+                    <div class="instruction-step">
+                        <strong>5. Prep Coating</strong>
+                        Melt the dark chocolate. Rough chop the remaining 1/2 cup of hazelnuts and fold them into the melted chocolate.
+                    </div>
+                    <div class="instruction-step">
+                        <strong>6. Dip and Set</strong>
+                        Dip each truffle into the chocolate-hazelnut mix, place on parchment paper, and refrigerate until set.
+                    </div>
+                </div>
+            </div>
+
+            <div class="lang-card">
+                <h2>🇸🇮 Slovenski Recept</h2>
+                
+                <div class="shopping-list">
+                    <h3>🛒 Nakupovalni seznam</h3>
+                    <p><em>Odkljukaj sestavine med nakupovanjem!</em></p>
+                    
+                    <label class="checklist-item">
+                        <input type="checkbox">
+                        <span><strong>Praženi lešniki:</strong> 1.5 skodelice (142g za osnovo + celi lešniki za sredino + okrasitev)</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox">
+                        <span><strong>Beljakovine v prahu:</strong> 1/2 skodelice (45g) čistega sirotkinega izolata ali rastlinskih beljakovin</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox">
+                        <span><strong>Ovseni kosmiči:</strong> 1/2 skodelice (45g)</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox">
+                        <span><strong>Kakav v prahu:</strong> 1/4 skodelice (28g)</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox">
+                        <span><strong>100% Javorjev sirup:</strong> 1/4 skodelice (71g)</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox">
+                        <span><strong>Ekstrakt vanilije:</strong> 2 čajni žlički</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox">
+                        <span><strong>Morska sol:</strong> 1/2 čajne žličke</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox">
+                        <span><strong>Temna čokolada:</strong> 1/2 skodelice (85g) - vsaj 70% kakava</span>
+                    </label>
+                </div>
+
+                <div class="instructions">
+                    <h3>👨‍🍳 Navodila za pripravo</h3>
+                    
+                    <div class="instruction-step">
+                        <strong>1. Priprava osnove</strong>
+                        V sekljalniku mešajte 1 skodelico praženih lešnikov 2-3 minute, dokler ne nastane gosta pasta.
+                    </div>
+                    <div class="instruction-step">
+                        <strong>2. Mešanje sestavin</strong>
+                        V sekljalnik dodajte ovseno moko (zmlete kosmiče), beljakovine, kakav, sol, vanilijo in javorjev sirup. Premešajte, da nastane testo. Po potrebi dodajte kapljico vode.
+                    </div>
+                    <div class="instruction-step">
+                        <strong>3. Oblikovanje kroglic</strong>
+                        Vzemite žlico mase, jo sploščite, na sredino položite cel lešnik in oblikujte gladko kroglico.
+                    </div>
+                    <div class="instruction-step">
+                        <strong>4. Zamrzovanje</strong>
+                        Kroglice postavite v zamrzovalnik za 15–20 minut, da se učvrstijo.
+                    </div>
+                    <div class="instruction-step">
+                        <strong>5. Priprava preliva</strong>
+                        Stopite temno čokolado. Preostale lešnike (1/2 skodelice) grobo nasekljajte in jih vmešajte v stopljeno čokolado.
+                    </div>
+                    <div class="instruction-step">
+                        <strong>6. Namakanje in hlajenje</strong>
+                        Vsako kroglico pomočite v čokoladno-lešnikovo mešanico, položite na peki papir in postavite v hladilnik, dokler se čokolada ne strdi.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="gallery">
+            <img src="https://images.unsplash.com/photo-1574343169727-46321287c89d?auto=format&fit=crop&w=800&q=80" alt="Hazelnuts">
+            <img src="https://images.unsplash.com/photo-1620986518131-7e793922d5de?auto=format&fit=crop&w=800&q=80" alt="Dark Chocolate Melting">
+        </div>
+
+    </div>
+</body>
+</html>
